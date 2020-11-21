@@ -1,0 +1,33 @@
+animation au landing: 444, opacité puis vers le haut affichage du sous-titre
+
+header fix
+
+home : player audio prods klm
+
+vignettes animation n&b: hover couleur + nom du projet qui s'affiche (en bandeau ? a voir)
+
+
+SONS du site : extraits de 30s
+
+Page Adios Bahamas :
+	444 devient Népal
+	(rajouter 444 a la place de 2fingz pour retour à la home) 
+	rajouter un bouton + a coté du bouton play pour renvoyer vers les sites marchands
+
+Page Single : 
+	tous les singles à la suite des autres
+	444 devient Népal
+
+page Grand Master Splinter : 
+	444 devient GMS
+
+page Featurings (2010-2019) : 
+(voir wikipedia pour les titres)
+
+Easter Egg : lien vers John Doe #1
+
+Typo corps de texte : Minion
+444 : 
+
+	
+	
