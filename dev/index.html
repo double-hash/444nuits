@@ -6,15 +6,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script src="js/vendors/p5.js"></script> TODO : A retirer -->
-    <script src="js/script.js"></script>
 </head>
 <body>
     <header class="header">
         <h1><a href="index.html">Népal</a></h1>
         <h2>KLM – Grand Master Splinter – 2fingz</h2>
-        <div class="player">
-
+        <div class="player player--playing">
+            <div class="player__btn">
+                <div class="player__playicon">
+                    &nbsp;▶ 
+                </div>        
+                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                    <style>
+                        .player__progressbar {
+                            fill: none;
+                            stroke-width: 1.5px;
+                            stroke-miterlimit: round;
+                            transition: stroke-dashoffset 500ms ease-in-out;
+                            stroke-dasharray: 200; 
+                            stroke-dashoffset: 200;
+                        }
+                    </style>
+                    <path d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" stroke-width="2" stroke="#F2F2F2"  fill="none"/>
+                    <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" stroke-width="1.5" stroke="#000"  fill="none"/>
+                    <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                </svg>
+            </div>
+            <audio src="assets/prods/prod1.mp3" loop></audio>
         </div>
     </header>
     <main class="main main--feed">
@@ -55,5 +75,7 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque fugiat soluta maiores cum nostrum magnam illo impedit inventore, consequatur nobis corporis quae enim harum illum voluptates perferendis, fuga ut dignissimos.
         </div>
     </footer>
+    
+    <script src="js/script.js"></script>
 </body>
 </html>

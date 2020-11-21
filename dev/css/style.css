@@ -21,6 +21,7 @@ body {
 .header{
     width:100%;
     background: white;
+    position: relative;
     position:sticky;
     top:0;
     text-align: center;
@@ -33,6 +34,45 @@ body {
     content:"";
     height:100%;
 }
+
+.player {
+    position: absolute;
+    top:50px;
+    right:var(--col-width);
+}
+.player__btn {
+    width:40px;
+    height:40px;
+    position:relative;
+    cursor:pointer;
+}
+
+/* svg path {
+    stroke-width: 1.5px;
+    stroke-miterlimit: round;
+    -webkit-transition: stroke-dashoffset 850ms ease-in-out;
+    transition: stroke-dashoffset 850ms ease-in-out;
+} */
+
+.player__btn .player__playicon {
+    position: absolute;
+    text-align: center;
+    /* line-height: 1rem; */
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.player__progress {
+    width:40px;
+    height:40px;
+    transform: scaleX(-100%) rotateZ(90deg) ;
+}
+
+.player__progressbar {
+    /* transform:rotateZ(90deg); */
+}
+
 
 h1 {
     font-size: 3.5em;
@@ -48,7 +88,7 @@ h1 {
 }
 
 .footer {
-    background: rgba(29, 29, 27, 0.05);
+    background:#F2F2F2;
     box-sizing: border-box;
     padding: 50px var(--col-width);
     margin-top:50px;
