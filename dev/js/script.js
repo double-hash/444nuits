@@ -66,21 +66,24 @@ function updatePlayer(value) {
 loadingAnim();
 
 function loadingAnim(){
+    let headerHeight = $('.header').outerHeight(true);
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
     $('.body').addClass('loading');
+    $('.header').css('position', 'fixed');
+    $('.sous-titre').css('transform', 'skewX(90deg)');
+    $('.sous-titre').css('opacity', '0');
+    $('.main').css('margin-top', headerHeight);
     // $('.loader').css('height', '100vh')
     $('.body').imagesLoaded( function() {
         // setTimeout(() => {
             gsap.to($('.sous-titre'), {
-                duration: 0.3,
-                delay:1.7,
+                duration: 0.6,
+                delay:1.4,
                 y:0,
                 skewX:0,
-                ease: 'ease.in',
-                onComplete : function() {
-                    $('.body').removeClass('loading');
-                }
+                opacity:4,
+                ease: 'power4.inOut',
             });
             gsap.to($('.titre'), {
                 duration:2,
@@ -88,20 +91,22 @@ function loadingAnim(){
                 ease: 'power2.inOut',
                 onComplete: function() {
                     gsap.to($('.header .loader'), {
-                        duration: 0.8,
-                        delay:0.3,
+                        duration: 0.5,
                         height: 90,
                         ease: 'power2.out',
                         onComplete : function() {
+                            $('.body').removeClass('loading');
+                            $('.loading-screen').css('display', 'none');
+                            $('.header').css('position', 'sticky');
+                            $('.main').css('margin-top', 0);
                         }
                     });
                     gsap.to($('.loading-screen'), {
-                        duration: 1,
-                        delay:0.5,
+                        duration: 0.5,
+                        delay:0.4,
                         opacity: 0,
                         ease: 'ease.in',
                         onComplete : function() {
-                            $('.loading-screen').css('display', 'none');
                         }
                     });
                 }
