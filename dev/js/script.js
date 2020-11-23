@@ -18,7 +18,7 @@ function(){
     $('.player__btn').on('click', function(){
         if (aud.paused) {
             aud.play();
-            $('.player__playicon').html('⏸');
+            $('.player__playicon').html('&#9614;&nbsp;&#9614;');
         }
         else {
             aud.pause();
@@ -91,22 +91,22 @@ function loadingAnim(){
                 ease: 'power2.inOut',
                 onComplete: function() {
                     gsap.to($('.header .loader'), {
-                        duration: 0.5,
+                        duration: 0.7,
                         height: 90,
                         ease: 'power2.out',
                         onComplete : function() {
                             $('.body').removeClass('loading');
-                            $('.loading-screen').css('display', 'none');
                             $('.header').css('position', 'sticky');
                             $('.main').css('margin-top', 0);
                         }
                     });
                     gsap.to($('.loading-screen'), {
-                        duration: 0.5,
-                        delay:0.4,
+                        duration: 1,
+                        delay:0.7,
                         opacity: 0,
-                        ease: 'ease.in',
-                        onComplete : function() {
+                        ease: 'Power1.in',
+                        onComplete : function() {                            $('.loading-screen').css('display', 'none');
+                            $('.loading-screen').css('display', 'none');
                         }
                     });
                 }
