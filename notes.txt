@@ -2,7 +2,13 @@ animation au landing: 444, opacité puis vers le haut affichage du sous-titre
 
 header fix
 
-home : player audio prods klm
+home : player audio prods klm 
+
+// TODO : 
+autoplay
+augmenter espace entre header et miniatures
+footer : réduire taille typo
+
 
 vignettes animation n&b: hover couleur + nom du projet qui s'affiche (en bandeau ? a voir)
 
@@ -27,7 +33,7 @@ page Featurings (2010-2019) :
 Easter Egg : lien vers John Doe #1
 
 Typo corps de texte : Minion
-444 : 
+444 : Monument Extended
 
 	
 	

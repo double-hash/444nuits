@@ -11,24 +11,28 @@
 //     path.style.strokeDashoffset = Math.max(0, 200-to);  
 //   });
 
-
-$(
-function(){
-    var aud = $('audio')[0];
-    $('.player__btn').on('click', function(){
-        if (aud.paused) {
-            aud.play();
-            $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+$(function(){
+        $('.player__icon--pause').css('display','none');
+        var aud = $('audio')[0];
+        $('.player__btn').on('click', function(){
+            if (aud.paused) {
+                aud.play();
+                $('.player__icon--play').css('display','none');
+                $('.player__icon--pause').css('display','block');
+                // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+            }
+            else {
+                aud.pause();
+                $('.player__icon--pause').css('display','none');
+                $('.player__icon--play').css('display','block');
+                // $('.player__playicon').html('▶');
+            }
+        })
+        aud.ontimeupdate = function(){
+            updatePlayer(aud.currentTime / aud.duration * 100)
         }
-        else {
-            aud.pause();
-            $('.player__playicon').html('&nbsp;▶');
-        }
-    })
-    aud.ontimeupdate = function(){
-        updatePlayer(aud.currentTime / aud.duration * 100)
-    }
-})
+    loadingAnim();
+});
 
 
 function updatePlayer(value) {
@@ -63,10 +67,10 @@ function updatePlayer(value) {
 //     //   console.log(obj.prop); //logs the value on each update.
 //     // }
 //   });
-loadingAnim();
 
 function loadingAnim(){
     let headerHeight = $('.header').outerHeight(true);
+    // console.log(headerHeight);
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
     $('.body').addClass('loading');
