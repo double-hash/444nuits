@@ -9,13 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <!-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+    <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <!-- <script src="js/vendors/p5.js"></script> TODO : A retirer -->
 </head>
 <body class="body">
     <header class="header">
+        <div id="dz-root"></div>
         <div class="header__title">
             <h1 class="header__title--main titre ">
                 <a href="index.html">
@@ -39,230 +41,7 @@
                 </div>
             </header>
             <ul class="article__main">
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
-                <li class="article__item">
-                    <h2>Openning</h2>
-                    <div class="points"></div>
-                    <div class="player player--playing">
-                        <div class="player__btn">
-                            <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                                <style>
-                                    .player__progressbar {
-                                        fill: none;
-                                        
-                                        stroke-miterlimit: round;
-                                        transition: stroke-dashoffset 500ms ease-in-out;
-                                        stroke-dasharray: 200; 
-                                        stroke-dashoffset: 200;
-                                    }
-                                </style>
-                                <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                                <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                            </svg>
-                        </div>
-                        <audio src="assets/prods/prod1.mp3" loop></audio>
-                    </div>
-                </li>
+               
             </ul>
             <div class="article__medias">
                 <div class="article__video">
@@ -287,6 +66,6 @@
         </div>
     </footer>
     
-    <!-- <script src="js/script.js"></script> -->
+    <script src="js/script.js"></script>
 </body>
 </html>
