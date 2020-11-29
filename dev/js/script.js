@@ -1,4 +1,6 @@
 function loadingAnim(){
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     let headerHeight = $('.header').outerHeight(true);
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
@@ -7,7 +9,7 @@ function loadingAnim(){
     $('.sous-titre').css('transform', 'skewX(90deg)');
     $('.sous-titre').css('opacity', '0');
     $('.main').css('margin-top', headerHeight);
-    $('.body').imagesLoaded( function() {
+    // $('.body').imagesLoaded( function() {
         gsap.to($('.sous-titre'), {
             duration: 0.6,
             delay:1.4,
@@ -24,7 +26,7 @@ function loadingAnim(){
                 gsap.to($('.header .loader'), {
                     duration: 0.7,
                     height: 90,
-                    ease: 'power2.out',
+                    ease: 'power2.inOut',
                     onComplete : function() {
                         $('.body').removeClass('loading');
                         $('.header').css('position', 'sticky');
@@ -42,19 +44,18 @@ function loadingAnim(){
                 });
             }
         });
-    });
+    // });
   }
 
-
-window.dzAsyncInit = function() {
+window.dzAsyncInit = function(id) {
     DZ.init({
         appId  : '447722', // final key
         // appId  : '447762', // test key
         channelUrl : 'http://127.0.0.1:5500/channel.html'
     });
-    // Get data from user with ID 5
-    DZ.api('/album/120441792/tracks', function(response){
-        console.log(response);
+    // Get data from /album/120441792/tracks
+    DZ.api(id, function(response){
+        // console.log(response);
         response.data.forEach(element => {
             var duration = {
                 minutes : 0,
@@ -68,29 +69,39 @@ window.dzAsyncInit = function() {
             }
 
             var player = new Player(element.preview);
-            var domElement = '<li class="article__item"><h2>' + element.title + '</h2><div class="points"></div><p>'+ duration.minutes +':' + duration.seconds +'&nbsp;</p>'+ player.domElement +'</li>'
-            $('.article__main').append(domElement);
+            var domElement = '<li class="article__item"><h2>' + element.title + '</h2><div class="points"></div><p>'+ duration.minutes +':' + duration.seconds +'</p>&nbsp;'+ player.domElement +'</li>'
+            $('.main').find('.article__main').append(domElement);
+            // console.log($('.main'))
             player.init();
             $('.player__icon--pause').css('display','none'); 
         });
     });
-};
+};                
+
 
 $(function() {
-    $('.player__icon--pause').css('display','none'); 
-	var e = document.createElement('script');
-	e.src = 'https://cdns-files.dzcdn.net/js/min/dz.js';
-	e.async = true;
-    document.getElementById('dz-root').appendChild(e);
-
+	// var e = document.createElement('script');
+	// e.src = 'https://cdns-files.dzcdn.net/js/min/dz.js';
+    // e.async = true;
+    // if (document.getElementById('dz-root')) {
+    //     document.getElementById('dz-root').appendChild(e);
+    // }
+    let playingAudio;
     $('.body').on('click', '.player', function() {
         player = $(this);
         var aud = $(this).children('audio')[0];
         if (aud.paused) {
+            if (playingAudio && playingAudio !== aud) {
+                playingAudio.currentTime = 0;
+                playingAudio.pause();
+            }
             aud.play();
+            $('.player__icon--pause').css('display','none');
+            $('.player__icon--play').css('display','block');
             $(this).find('.player__icon--play').css('display','none');
             $(this).find('.player__icon--pause').css('display','block');
             // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+            playingAudio = aud;
         }
         else {
             aud.pause();
@@ -98,8 +109,63 @@ $(function() {
             $(this).find('.player__icon--play').css('display','block');
             // $('.player__playicon').html('▶');
         }
+        let path = $(this).find('path.player__progressbar')[0];
+        aud.ontimeupdate = function(){
+            let value = aud.currentTime / aud.duration * 100
+            let length = path.getTotalLength();
+            let to = length *( value / 100);
+            // Trigger Layout in Safari Hack 
+            // https://jakearchibald.com/2013/animated-line-drawing-svg/
+            path.getBoundingClientRect();
+            path.style.strokeDashoffset = Math.max(0, 200-to); 
+        } 
     });
-  });
+    
+ 
+    barba.init({
+        cacheIgnore: true,
+        views: [{
+            namespace: 'home',
+            beforeEnter() {
+                // update the menu based on user navigation
+                $('.player__icon--pause').css('display','none'); 
+                loadingAnim();
+            },
+            afterEnter() {
+                // refresh the parallax based on new page content
+                // parallax.refresh();
+            }
+        },
+        {
+            namespace: 'page',
+            beforeEnter(){
+                //launching deezer API
+                window.dzAsyncInit('/album/120441792/tracks');
+            }
+        }],
+        transitions: [{
+            name: 'opacity-transition',
+            leave(data) {
+            return gsap.to(data.current.container, {
+                duration:0.5,
+                ease: 'Power1.out',
+                opacity: 0
+            });
+            },
+            enter(data) {
+            return gsap.from(data.next.container, {
+                duration:0.5,
+                ease: 'Power1.in',
+                opacity: 0
+            });
+            }
+        }]
+    });
+});
+
+  (function($) {
+    
+})(jQuery);
 
 
 
