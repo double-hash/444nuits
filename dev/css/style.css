@@ -58,7 +58,7 @@ p+p {
 }
 
 .footer__logos img{
-    height: 3.5em;
+    height: 2.7em;
     margin-left: 15px;
 }
 
@@ -354,10 +354,17 @@ body.loading {
 
 @media screen and (max-width:768px) {
     body {
-        font-size:17px;
-        line-height: 1.25;
+        font-size:14px;
+        /* line-height: 1.25; */
         --gutter-width : 20px;
         --col-width: 20px;
+    }
+    .header{
+        padding: 20px 0;
+        margin:40px 0 60px;
+    }
+    .header .titre{
+        font-size:2em;
     }
     .main, 
     .footer {
@@ -369,30 +376,32 @@ body.loading {
         width: 100%;
     }
     .article__header img {
-        width: 100%;
-        margin-right: 0;
+        width:100%;
+        /* width: calc(100% + (var(--gutter-width)*2));
+        margin-right: calc( 0px - var(--gutter-width));
+        margin-left: calc( 0px - var(--gutter-width)); */
         margin-bottom: 15px;
     }
     .article__infos {
         margin-top: 25px;
     }
     .footer__infos {
+        margin-top: 15px;
         text-align: center;
     }
     .footer__logos {
         /* position: absolute; */
-        margin-top: 15px;
         justify-content: center;
         flex-direction: row-reverse;
+    }
+    .footer__details {
+        text-align: center;
     }
     .footer__logos img {
         margin-left: 0;
         margin-right: 15px;
     }
-    /* .article__video {
-        width:100%;
-        height:30vh;
-    } */
+
 }
 
 @media screen and (min-width: 1500px) {
@@ -414,11 +423,13 @@ body.loading {
     .footer__infos {
         box-sizing: border-box;
         width: calc((var(--col-width) * 3));
+        flex:1;
         /* padding-right:var(--gutter-width); */
     }
     .footer__logos {
         box-sizing: border-box;
         width: calc((var(--col-width) * 3));
+        flex:1;
         /* padding-left:var(--gutter-width); */
     }
     
@@ -431,6 +442,7 @@ body.loading {
     }
 
     .footer__details {
+        /* flex:1; */
         width: calc(var(--col-width) * 8);
         text-align: justify;
         /* align-self: center; */
@@ -441,6 +453,9 @@ body.loading {
 
 
 @media screen and (min-width: 769px) {
+    .footer__logos {
+        float:right;
+    }
    
     .work--item .cover {
         filter: grayscale(1);
