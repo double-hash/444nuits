@@ -9,63 +9,68 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- unpkg -->
+    <script src="https://unpkg.com/@barba/core"></script>
     <!-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
     <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <!-- <script src="js/vendors/p5.js"></script> TODO : A retirer -->
 </head>
-<body class="body">
-    <header class="header">
-        <div id="dz-root"></div>
-        <div class="header__title">
-            <h1 class="header__title--main titre ">
-                <a href="index.html">
-                    Népal
-                    <!-- <div class="title-logo"></div> -->
-                </a>
-            </h1>
-            <h2 class="sous-titre">KLM – Grand Master Splinter – 444</h2>
-        </div>
-    </header>
-    <main class="main">
-        <article class="article article--album">
-            <header class="article__header">
-                <img src="./assets/img/adios.jpg" alt="">
-                <div class="article__infos">
-                    <h1>Adios Bahamas</h1>
-                    <p>12 titres – 52min – Triple 4 Gear – 2020</p>
-                    <p>Produit par KLM, Sheldon, Espektaz</p> 
-                    <p>Featurings: Nekfeu, Di-meh, Sheldon, 3010, Doums</p>
-                    <p>Album disponible sur 444nuitsshop.fr et sur les autres sites marchands en physique et digital</p>
-                </div>
-            </header>
-            <ul class="article__main">
-               
-            </ul>
-            <div class="article__medias">
-                <div class="article__video">
-                    <iframe class="article__video" src="https://www.youtube.com/embed/N7K_6MqEAxE?modestbranding=1&color=white&controls=2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="article__video">
-                    <iframe class="article__video" src="https://www.youtube.com/embed/cLBatFV33lE?modestbranding=1&color=white&controls=2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+<body class="body" data-barba="wrapper">
+    <div data-barba="container" data-barba-namespace="page">
+        <header class="header">
+            <div id="dz-root"></div>
+            <div class="header__title">
+                <h1 class="header__title--main titre ">
+                    <a href="index.html">
+                        Népal
+                        <!-- <div class="title-logo"></div> -->
+                    </a>
+                </h1>
+                <h2 class="sous-titre">KLM – Grand Master Splinter – 444</h2>
             </div>
-        </article>
-    </main>
-    <footer class="footer">
-        <div class="footer__infos">
-            <p>Népal © 2020 – Triple 4 Gear Records</p>
-            <p>info/press: <a href="mailto:75esession@gmail.com">75esession@gmail.com</a></p>
-        </div>
-        <div class="footer__logos">
-
-        </div>
-        <div class="footer__details">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque fugiat soluta maiores cum nostrum magnam illo impedit inventore, consequatur nobis corporis quae enim harum illum voluptates perferendis, fuga ut dignissimos.
-        </div>
-    </footer>
-    
+        </header>
+        <main class="main">
+            <article class="article article--album">
+                <header class="article__header">
+                    <img src="./assets/img/adios.jpg" alt="">
+                    <div class="article__infos">
+                        <h1>Adios Bahamas</h1>
+                        <p>12 titres – 52min – Triple 4 Gear – 2020</p>
+                        <p>Produit par KLM, Sheldon, Espektaz</p> 
+                        <p>Featurings: Nekfeu, Di-meh, Sheldon, 3010, Doums</p>
+                        <p>Album disponible sur 444nuitsshop.fr et sur les autres sites marchands en physique et digital</p>
+                    </div>
+                </header>
+                <ul class="article__main">
+                
+                </ul>
+                <div class="article__medias">
+                    <div class="article__video">
+                        <iframe class="article__video" src="https://www.youtube.com/embed/N7K_6MqEAxE?modestbranding=1&color=white&controls=2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="article__video">
+                        <iframe class="article__video" src="https://www.youtube.com/embed/cLBatFV33lE?modestbranding=1&color=white&controls=2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </article>
+        </main>
+        <footer class="footer">
+            <div class="footer__infos">
+                <p>Népal © 2020 – Triple 4 Gear Records</p>
+                <p>info/press: <a href="mailto:75esession@gmail.com">75esession@gmail.com</a></p>
+            </div>
+            <div class="footer__logos">
+                <img src="./assets/img/triple4logo.png" alt="">
+                <img src="./assets/img/laxlogo.png" alt="">
+                <img src="./assets/img/75e-sesslogo.png" alt="">
+            </div>
+            <div class="footer__details">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque fugiat soluta maiores cum nostrum magnam illo impedit inventore, consequatur nobis corporis quae enim harum illum voluptates perferendis, fuga ut dignissimos.
+            </div>
+        </footer>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>

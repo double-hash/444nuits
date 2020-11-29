@@ -9,91 +9,102 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <!-- unpkg -->
+    <script src="https://unpkg.com/@barba/core"></script>
+    <!-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+    <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <!-- <script src="js/vendors/p5.js"></script> TODO : A retirer -->
 </head>
-<body class="body">
-    <header class="header">
-        <div class="player">
-            <div class="player__btn">
-                <div class="player__icon player__icon--play">
-                </div> 
-                <div class="player__icon player__icon--pause" >
-                </div>               
-                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
-                    <style>
-                        .player__progressbar {
-                            fill: none;
-                            stroke-miterlimit: round;
-                            transition: stroke-dashoffset 500ms ease-in-out;
-                            stroke-dasharray: 200; 
-                            stroke-dashoffset: 200;
-                        }
-                    </style>
-                    <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                    <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
-                    <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
-                </svg>
+<body class="body" data-barba="wrapper">
+    <div data-barba="container" data-barba-namespace="home">
+        <header class="header">
+            <div id="dz-root"></div>
+            <div class="header__title">
+                <h1 class="header__title--main titre ">
+                    <a href="index.html">
+                        <div class="title-logo"></div>
+                    </a>
+                </h1>
+                <h2 class="sous-titre">KLM – Grand Master Splinter – Népal</h2>
             </div>
-            <audio src="assets/prods/prod1.mp3" loop></audio>
-        </div>
-        <div class="header__title">
-            <h1 class="header__title--main titre ">
-                <a href="index.html">
-                    <div class="title-logo"></div>
-                </a>
-            </h1>
-            <h2 class="sous-titre">KLM – Grand Master Splinter – Népal</h2>
-        </div>
-    </header>
-    <main class="main main--feed">
-        <a href="adios-bahamas.html" class="work--item">
-            <div class="cover">
-                <img src="assets/img/adios.jpg" alt="">
+            <div class="player">
+                <div class="player__btn">
+                    <div class="player__icon player__icon--play">
+                    </div> 
+                    <div class="player__icon player__icon--pause" >
+                    </div>               
+                    <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                        <style>
+                            .player__progressbar {
+                                fill: none;
+                                stroke-miterlimit: round;
+                                transition: stroke-dashoffset 500ms ease-in-out;
+                                stroke-dasharray: 200; 
+                                stroke-dashoffset: 200;
+                            }
+                        </style>
+                        <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                        <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                        <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                    </svg>
+                </div>
+                <audio src="assets/prods/prod1.mp3" loop></audio>
             </div>
-            <div class="work__details">
-                
-            </div>
-        </a>
-        <a href="adios-bahamas.html" class="work--item">
-            <div class="cover">
-                <img src="assets/img/kkshi.jpg" alt="">
-            </div>
-            <div class="work__details">
+        </header>
+        <!-- put here the content you wish to change
+        between your pages, like your main content <h1> or <p> -->
+        <main class="main main--feed">
+            <a href="adios-bahamas.html" class="work--item">
+                <div class="cover">
+                    <img src="assets/img/adios.jpg" alt="">
+                </div>
+                <div class="work__details">
+                    
+                </div>
+            </a>
+            <a href="adios-bahamas.html" class="work--item">
+                <div class="cover">
+                    <img src="assets/img/kkshi.jpg" alt="">
+                </div>
+                <div class="work__details">
+    
+                </div>
+            </a>
+            <a href="adios-bahamas.html" class="work--item">
+                <div class="cover">
+                    <img src="assets/img/445.jpg" alt="">
+                </div>
+                <div class="work__details">
+    
+                </div>
+            </a>
+            <a href="adios-bahamas.html" class="work--item">
+                <div class="cover">
+                    <img src="assets/img/444.jpg" alt="">
+                </div>
+                <div class="work__details">
+                </div>
+            </a>
+            <!-- <div class="grid-sizer"></div> -->
+        </main>
 
+        <footer class="footer">
+            <div class="footer__infos">
+                <p>Népal © 2020 – Triple 4 Gear Records</p>
+                <p>info/press: <a href="mailto:75esession@gmail.com">75esession@gmail.com</a></p>
             </div>
-        </a>
-        <a href="adios-bahamas.html" class="work--item">
-            <div class="cover">
-                <img src="assets/img/445.jpg" alt="">
+            <div class="footer__logos">
+                <img src="./assets/img/triple4logo.png" alt="">
+                <img src="./assets/img/laxlogo.png" alt="">
+                <img src="./assets/img/75e-sesslogo.png" alt="">
             </div>
-            <div class="work__details">
-
+            <div class="footer__details">
+                <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque fugiat soluta maiores cum nostrum magnam illo impedit inventore, consequatur nobis corporis quae enim harum illum voluptates perferendis, fuga ut dignissimos.</p>
             </div>
-        </a>
-        <a href="adios-bahamas.html" class="work--item">
-            <div class="cover">
-                <img src="assets/img/444.jpg" alt="">
-            </div>
-            <div class="work__details">
-            </div>
-        </a>
-        <!-- <div class="grid-sizer"></div> -->
-    </main>
-    <footer class="footer">
-        <div class="footer__infos">
-            <p>Népal © 2020 – Triple 4 Gear Records</p>
-            <p>info/press: <a href="mailto:75esession@gmail.com">75esession@gmail.com</a></p>
-        </div>
-        <div class="footer__logos">
-
-        </div>
-        <div class="footer__details">
-            <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque fugiat soluta maiores cum nostrum magnam illo impedit inventore, consequatur nobis corporis quae enim harum illum voluptates perferendis, fuga ut dignissimos.</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
     
     <script src="js/script.js"></script>
 </body>
