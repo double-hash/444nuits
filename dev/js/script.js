@@ -81,7 +81,7 @@ window.dzAsyncInit = function(articles) {
                 }
     
                 var player = new Player(element.preview);
-                var domElement = '<li class="article__item"><h2>' + element.title + '</h2><div class="points"></div><p>'+ duration.minutes +':' + duration.seconds +'</p>&nbsp;'+ player.domElement +'<a href="'+rUrl+'" class="item__more" target="_blank"><span class="more--icon">+</span><svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" ><style>.player__progressbar{fill:none;stroke-miterlimit:round;transition:stroke-dashoffset 500ms ease-in-out;stroke-dasharray:200;stroke-dashoffset:200}</style><path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/></svg></a></li>'
+                var domElement = '<li class="article__item"><h2>' + element.title + '</h2><div class="points"></div><p>'+ duration.minutes +':' + duration.seconds +'</p>'+ player.domElement +'<a href="'+rUrl+'" class="item__more" target="_blank"><span class="more--icon">+</span><svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" ><style>.player__progressbar{fill:none;stroke-miterlimit:round;transition:stroke-dashoffset 500ms ease-in-out;stroke-dasharray:200;stroke-dashoffset:200}</style><path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/></svg></a></li>'
                 $(article).find('.article__main').append(domElement);
                 // console.log($('.main'))
                 player.init();
@@ -146,7 +146,7 @@ $(function() {
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 // update the menu based on user navigation
                 $('.player__icon--pause').css('display','none'); 
-                loadingAnim();
+                // loadingAnim();
             },
             afterEnter() {
                 // refresh the parallax based on new page content
@@ -159,6 +159,7 @@ $(function() {
                 document.body.scrollTop = 0; // For Safari
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 //launching deezer API
+                // TODO : penser aux projets pas présents sur deezer
                 window.dzAsyncInit($('.article'));
                 // console.log($('.article'));
                 // $('.article').forEach(article => {
@@ -186,8 +187,8 @@ $(function() {
     });
 });
 
-  (function($) {
-    
+(function($) {
+    loadingAnim();
 })(jQuery);
 
 
