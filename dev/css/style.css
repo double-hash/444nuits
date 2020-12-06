@@ -46,6 +46,8 @@ body {
 
 .main {
     /* padding: 50px var(--col-width); */
+    box-sizing: border-box;
+    min-height: calc(100vh - 200px - 10rem);
     max-width: calc(var(--col-width) *8);
     margin: 0 auto;
 }
@@ -350,6 +352,10 @@ body.loading {
 
 
 /*--------------- ARTICLE --------------*/
+
+.article {
+    /* margin-bottom:100px; */
+}
 
 .article__header {
     display:flex;
