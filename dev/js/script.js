@@ -1,6 +1,6 @@
 function loadingAnim(){
-    // document.body.scrollTop = 0; // For Safari
-    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     let headerHeight = $('.header').outerHeight(true);
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
