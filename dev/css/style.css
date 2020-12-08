@@ -322,6 +322,15 @@ body.loading {
     overflow: hidden;
 }
 
+.cover__overlay {
+    position: absolute;
+    opacity: 1;
+    transition: 0.5s;
+}
+.cover__overlay:hover {
+    opacity: 0;
+}
+
 .work--item h2 {
     font-size:2em;
 }
