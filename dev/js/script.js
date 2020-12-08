@@ -1,7 +1,9 @@
+let headerHeight;
+
 function loadingAnim(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    let headerHeight = $('.header').outerHeight(true);
+    headerHeight = $('.header').outerHeight(true);
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
     $('.body').addClass('loading');
@@ -58,16 +60,16 @@ window.dzAsyncInit = function(articles) {
 
     
     var articles = $('.article');
-    console.log(articles);
+    // console.log(articles);
     $.each(articles, function(name, value) {
         // console.log(value);
         var article = value;
         let id = $(article).data("article-url");
         let rUrl = $(article).data("redirect-url");
-        console.log(id + " " + rUrl);
+        // console.log(id + " " + rUrl);
         // Get data from /album/120441792/tracks
         DZ.api(id, function(response){
-            // console.log(response);
+            console.log(response);
             response.data.forEach(element => {
                 var duration = {
                     minutes : 0,
@@ -170,18 +172,21 @@ $(function() {
         transitions: [{
             name: 'opacity-transition',
             leave(data) {
-            return gsap.to(data.current.container, {
-                duration:0.5,
-                ease: 'Power1.out',
-                opacity: 0
-            });
+                // $('.header').css('position','fixed');
+                // $('.header').css('margin-top', 0);
+                // $('.main').css('margin-top', headerHeight);
+                return gsap.to(data.current.container, {
+                    duration:0.5,
+                    ease: 'Power1.out',
+                    opacity: 0
+                });
             },
             enter(data) {
-            return gsap.from(data.next.container, {
-                duration:0.5,
-                ease: 'Power1.in',
-                opacity: 0
-            });
+                return gsap.from(data.next.container, {
+                    duration:0.5,
+                    ease: 'Power1.in',
+                    opacity: 0
+                });
             }
         }]
     });

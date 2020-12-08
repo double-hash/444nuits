@@ -97,7 +97,7 @@ p+p {
 /* -------------- HEADER STYLES -----------------*/
 
 .header{
-    width:100%;
+    width:100vw;
     overflow: hidden;
     max-height: 100vh;
     background: white;
@@ -112,6 +112,7 @@ p+p {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* transition: all 0.5s; */
 }
 
 
@@ -381,6 +382,10 @@ body.loading {
     font-size:2em;
     text-transform: none;
     line-height: 1;
+}
+
+.article__infos p:first-of-type {
+    margin-top:1em;
 }
 
 .article__item {
