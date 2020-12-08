@@ -54,14 +54,14 @@ body {
 
 .main--alt {
     /* overflow: ; */
-    max-width: calc(var(--col-width) *12);
-    padding-left: calc(var(--col-width) *2);
-    padding-right: calc(var(--col-width) *2);
+    max-width: calc(var(--col-width) *16);
+    padding-left: calc(var(--col-width) *4);
+    padding-right: calc(var(--col-width) *4);
     background-image: url("../assets/img/IMG_2817.png");
-    background-size: min(15%, 200px);
+    background-size: min(9%,400px);
     background-repeat: no-repeat;
-    background-position: right;
-    /* background-position-y:; */
+    background-position: calc(100% - var(--col-width) *1);
+    background-position-y:40vh;
     /* background-position-x: 110%; */
     padding-bottom:min(80vh, 300px);
 }
@@ -558,6 +558,7 @@ body.loading {
     .main--feed ~ .footer .footer__details {
 
     }
+    
     
     .footer {
         padding: 25px;
