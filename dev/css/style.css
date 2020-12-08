@@ -47,23 +47,18 @@ body {
 .main {
     /* padding: 50px var(--col-width); */
     box-sizing: border-box;
-    min-height: calc(100vh - 200px - 10rem);
+    min-height: calc(100vh - 100px - 10rem);
     max-width: calc(var(--col-width) *8);
     margin: 0 auto;
 }
 
 .main--alt {
     /* overflow: ; */
-    max-width: calc(var(--col-width) *16);
-    padding-left: calc(var(--col-width) *4);
-    padding-right: calc(var(--col-width) *4);
+    background-position-y:40vh;
     background-image: url("../assets/img/IMG_2817.png");
     background-size: min(9%,400px);
     background-repeat: no-repeat;
-    background-position: calc(100% - var(--col-width) *1);
-    background-position-y:40vh;
     /* background-position-x: 110%; */
-    padding-bottom:min(80vh, 300px);
 }
 
 div[data-barba="container"]{
@@ -502,7 +497,7 @@ body.loading {
     }
     .main--alt {
         background-position:right bottom;
-        padding-bottom:300px;
+        padding-bottom:200px;
         background-size: 33%;
     }
     .work--item {
@@ -550,9 +545,68 @@ body.loading {
 
 }
 
+@media screen and (min-width: 769px) {
+    .footer__logos {
+        float:right;
+    }
+    
+    .main--alt {
+        /* overflow: ; */
+        max-width: calc(var(--col-width) *12);
+        padding-left: calc(var(--col-width) *3);
+        padding-right: calc(var(--col-width) *3);
+        background-position: calc(100% - var(--col-width) *1);
+        background-position-y: 40vh;
+    }
+
+
+    .article__infos {
+        display: flex;
+        flex-direction: column;
+        /* flex-wrap: wrap; */
+        /* align-items: flex-start; */
+    }
+    .article__infos h1{
+        /* line-height: 0.7; */
+    }
+    .article__infos--push {
+        /* align-self: flex-end; */
+        margin-top:auto;
+    }
+   
+    .work--item .cover {
+        filter: grayscale(1);
+        -webkit-transition: 0.35s -webkit-filter ease-out;
+        -moz-transition: 0.35s -moz-filter ease-out;
+        -moz-transition: 0.35s filter ease-out;
+        -ms-transition: 0.35s -ms-filter ease-out;
+        -o-transition: 0.35s -o-filter ease-out;
+        transition: 0.35s filter ease-out, 0.35s -webkit-filter ease-out;
+    }
+
+    .work--item .cover:hover {
+        filter: grayscale(0);
+        -webkit-transition: 0.35s -webkit-filter ease-in;
+        -moz-transition: 0.35s -moz-filter ease-in;
+        -moz-transition: 0.35s filter ease-in;
+        -ms-transition: 0.35s -ms-filter ease-in;
+        -o-transition: 0.35s -o-filter ease-in;
+        transition: 0.35s filter ease-in, 0.35s -webkit-filter ease-in;
+    }
+}
+
+
 @media screen and (min-width: 1500px) {
     body {
         --col-width: calc(100vw / 16);    
+    }
+    .main--alt {
+        /* overflow: ; */
+        max-width: calc(var(--col-width) *16);
+        padding-left: calc(var(--col-width) *4);
+        padding-right: calc(var(--col-width) *4);
+        background-position: calc(100% - var(--col-width) *1);
+        background-position-y: 40vh;
     }
 
     .main--feed ~ .footer .footer__details {
@@ -598,43 +652,3 @@ body.loading {
     }
 }
 
-
-@media screen and (min-width: 769px) {
-    .footer__logos {
-        float:right;
-    }
-
-    .article__infos {
-        display: flex;
-        flex-direction: column;
-        /* flex-wrap: wrap; */
-        /* align-items: flex-start; */
-    }
-    .article__infos h1{
-        /* line-height: 0.7; */
-    }
-    .article__infos--push {
-        /* align-self: flex-end; */
-        margin-top:auto;
-    }
-   
-    .work--item .cover {
-        filter: grayscale(1);
-        -webkit-transition: 0.35s -webkit-filter ease-out;
-        -moz-transition: 0.35s -moz-filter ease-out;
-        -moz-transition: 0.35s filter ease-out;
-        -ms-transition: 0.35s -ms-filter ease-out;
-        -o-transition: 0.35s -o-filter ease-out;
-        transition: 0.35s filter ease-out, 0.35s -webkit-filter ease-out;
-    }
-
-    .work--item .cover:hover {
-        filter: grayscale(0);
-        -webkit-transition: 0.35s -webkit-filter ease-in;
-        -moz-transition: 0.35s -moz-filter ease-in;
-        -moz-transition: 0.35s filter ease-in;
-        -ms-transition: 0.35s -ms-filter ease-in;
-        -o-transition: 0.35s -o-filter ease-in;
-        transition: 0.35s filter ease-in, 0.35s -webkit-filter ease-in;
-    }
-}
