@@ -54,10 +54,12 @@ body {
 
 .main--alt {
     /* overflow: ; */
+    min-height: 70vh;
     background-position-y:40vh;
     background-image: url("../assets/img/IMG_2817.png");
     background-size: min(9%,400px);
     background-repeat: no-repeat;
+    /* padding-bottom:100px; */
     /* background-position-x: 110%; */
 }
 
