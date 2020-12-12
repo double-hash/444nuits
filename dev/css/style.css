@@ -698,7 +698,7 @@ body.loading {
         /* flex:1; */
         width: calc(var(--col-width) * 8);
         text-align: justify;
-        /* align-self: center; */
+        align-self: center;
         order:2;
         margin-top: 0;
     }
