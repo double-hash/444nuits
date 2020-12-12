@@ -409,12 +409,13 @@ body.loading {
 /*--------------- ARTICLE --------------*/
 
 .article {
-    /* margin-bottom:100px; */
+    margin-bottom: calc(var(--gutter-width) *4);
 }
 
 .article__header {
     display:flex;
     flex-wrap: wrap;
+    /* margin-bottom: calc(var(--gutter-width) *3); */
 }
 
 .article__header img {
@@ -424,7 +425,8 @@ body.loading {
 }
 
 .article__main {
-    padding: calc(var(--gutter-width) *3) 0;
+    padding-top: calc(var(--gutter-width) *2);
+    margin-bottom: calc(var(--gutter-width) *3);
 }
 
 .article__infos{
