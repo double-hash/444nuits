@@ -540,6 +540,10 @@ body.loading {
         padding-right:  calc(var(--col-width));
         padding-left: calc(var(--col-width));
     }
+    .main {
+        max-width:500px;
+        margin: 0 auto;
+    }
     .main--alt {
         background-position:right bottom;
         padding-bottom:200px;
