@@ -22,7 +22,7 @@ a:visited {
 }
 
 .article__infos a,
-.footer a {
+.footer a:hover {
     border-bottom: 1px solid var(--main-color);
 }
 
@@ -228,7 +228,7 @@ p+p {
     transform: translate(-50%,-50%);
 }
 
-.player__btn .player__icon {
+.player__icon {
     /* color: var(--alt-color); */
     position: absolute;
     width:100%;
@@ -248,6 +248,10 @@ p+p {
 }
 .player__icon--pause {
     background-image: url('../assets/img/pause-icon.png');
+}
+
+.player__icon--download {
+    background-image: url('../assets/img/download-icon.png');
 }
 
 .player__progress {
