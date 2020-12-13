@@ -103,6 +103,7 @@ $(function() {
     // if (document.getElementById('dz-root')) {
     //     document.getElementById('dz-root').appendChild(e);
     // }
+    $('.player__icon--pause').css('display','none'); 
     let playingAudio;
     $('.body').on('click', '.player', function() {
         player = $(this);
@@ -158,6 +159,7 @@ $(function() {
         {
             namespace: 'page',
             beforeEnter(){
+                $('.player__icon--pause').css('display','none'); 
                 document.body.scrollTop = 0; // For Safari
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 //launching deezer API
