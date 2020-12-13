@@ -549,7 +549,7 @@ body.loading {
         margin: 0 auto;
     }
     .main--alt {
-        background-position:right bottom;
+        background-position:center;
         padding-bottom:200px;
         background-size: 33%;
     }
