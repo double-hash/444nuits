@@ -25,7 +25,7 @@
                 </h1>
                 <p class="sous-titre">KLM • Grand Master Splinter • Népal</p>
             </div>
-            <div class="player">
+            <div class="player player--main">
                 <div class="player__btn">
                     <div class="player__icon player__icon--play">
                     </div> 
@@ -46,7 +46,6 @@
                         <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
                     </svg>
                 </div>
-                <audio src="assets/prods/prod1.mp3"></audio>
             </div>
         </header>
         <main class="main main--feed">
@@ -144,8 +143,12 @@
         <footer class="footer">
             <div class="footer__logos">
                 <img src="./assets/img/triple4logo.png" alt="">
-                <img src="./assets/img/laxlogo.png" alt="">
-                <img src="./assets/img/75e-sesslogo.png" alt="">
+                <a href="https://www.youtube.com/channel/UC1mOxnCDTcWsXeHbgbEbTZQ/videos"  target="_blank"> <!-- chaine youtube laxvision-->
+                    <img src="./assets/img/laxlogo.png" alt="">
+                </a>
+                <a href="https://www.youtube.com/user/75esession" target="_blank"> <!-- chaine youtube 75e sess-->
+                    <img src="./assets/img/75e-sesslogo.png" alt="">
+                </a>
             </div>
             <div class="footer__infos">
                 <p>
@@ -158,7 +161,9 @@
             </div>
         </footer>
     </div>
-    
+    <div id="current-playlist">
+        <audio src="assets/prods/prod1.mp3"></audio>
+    </div>  
     <script src="js/script.js"></script>
 </body>
 </html>

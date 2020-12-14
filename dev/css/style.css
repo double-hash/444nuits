@@ -116,6 +116,10 @@ p+p {
     justify-content: flex-end;
 }
 
+.footer__logos a:hover {
+    border-bottom: 0px;
+}
+
 .footer__logos img{
     height: 2.5em;
     max-width: 100px;
