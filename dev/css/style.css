@@ -143,7 +143,7 @@ p+p {
     max-height: 100vh;
     background: white;
     position:sticky;
-    z-index: 3;
+    z-index: 50;
     top:0;
     left:0;
     text-align: center;
@@ -152,6 +152,7 @@ p+p {
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    /* align-items:flex-end; */
     justify-content: center;
     /* transition: all 0.5s; */
 }
@@ -201,13 +202,7 @@ p+p {
     /* font-size: var(--font-size-xs); */
 }
 
-.header .player {
-    position: absolute;
-    z-index: -1;
-    top:50%;
-    transform:translateY(-50%);
-    right:var(--col-width);
-}
+
 
 .player__btn, 
 .item__more {
@@ -235,6 +230,7 @@ p+p {
 .player__icon {
     /* color: var(--alt-color); */
     position: absolute;
+    z-index: 10;
     width:100%;
     height:100%;
     background-size: cover;
@@ -247,6 +243,14 @@ p+p {
     left:50%; 
     transform: translate(-50%,-50%); */
 }
+
+.player__icon--next {
+    background-image: url('../assets/img/next-icon.png');
+}
+.player__icon--prev {
+    background-image: url('../assets/img/prev-icon.png');
+}
+
 .player__icon--play {
     background-image: url('../assets/img/play-icon.png');
 }
@@ -276,6 +280,7 @@ p+p {
     stroke : #fff;
     stroke-width: 3px;
 }
+
 
 /* -------------- LOADER STYLES -----------------*/
 
@@ -330,6 +335,17 @@ body.loading {
     }
 }
 
+@keyframes textAnim {
+    0% {
+        transform:translateX(100%);
+    }
+    /* 66% {
+        transform:translateX(-50%);
+    } */
+    100% {
+        transform:translateX(-100%);
+    }
+}
 
 /* .loading .header h1 {
     animation: fadeIn alternate-reverse ease-in-out 2s infinite;
@@ -621,6 +637,40 @@ body.loading {
 @media screen and (min-width: 769px) {
     .footer__logos {
         float:right;
+    }
+    .player--main {
+        position: absolute;
+        z-index: -1;
+        /* top:50%;
+        transform:translateY(-50%); */
+        right:var(--col-width);
+        width: calc(var(--col-width));
+        align-self: flex-end;
+        margin-bottom:0.5em;
+    }
+    .player--main > *:not(.player__btn--play) {
+        opacity:0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .player--main:hover > * {
+        opacity:1;
+    }
+    .now-playing{
+        min-height: 1em;
+        margin-top:0.3em;
+        /* overflow: hidden; */
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .now-playing p {
+        display: inline-block;
+        /* transform:translateX(10%); */
+    }
+    .player--main:hover .now-playing p {
+        text-overflow: ellipsis;
+    }
+    .defiling {
+        animation: textAnim 5s linear infinite;
     }
     
     .main--alt {

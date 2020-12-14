@@ -105,51 +105,186 @@ $(function() {
     // }
     $('.player__icon--pause').css('display','none'); 
     let playingAudio;
-    $('.body').on('click', '.player', function() {
-        player = $(this);
-        var aud = $(this).children('audio')[0];
-        if (aud.paused) {
-            if (playingAudio && playingAudio !== aud) {
-                playingAudio.currentTime = 0;
-                playingAudio.pause();
+    $('.body').on('click', '.player--main', function(e) {
+        if ($(e.target).hasClass('player__icon--next')) {
+            console.log('next');
+        }
+        else if ($(e.target).hasClass('player__icon--prev')) {
+            console.log('pprev');
+        }
+        else if ($(e.target).hasClass('player__icon--play') || $(e.target).hasClass('player__icon--pause')){
+            player = $(this);
+            var aud = $('#current-playlist').children('audio')[0];
+            if (aud.paused) {
+                if (playingAudio && playingAudio !== aud) {
+                    playingAudio.currentTime = 0;
+                    playingAudio.pause();
+                }
+                aud.play();
+                $('.player__icon--pause').css('display','none');
+                $('.player__icon--play').css('display','block');
+                $(this).find('.player__icon--play').css('display','none');
+                $(this).find('.player__icon--pause').css('display','block');
+                // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+                playingAudio = aud;
             }
-            aud.play();
+            else {
+                aud.pause();
+                $(this).find('.player__icon--pause').css('display','none');
+                $(this).find('.player__icon--play').css('display','block');
+                // $('.player__playicon').html('▶');
+            }
+            let path = $(this).find('path.player__progressbar')[0];
+            aud.ontimeupdate = function(){
+                let value = aud.currentTime / aud.duration * 100
+                let length = path.getTotalLength();
+                let to = length *( value / 100);
+                // Trigger Layout in Safari Hack 
+                // https://jakearchibald.com/2013/animated-line-drawing-svg/
+                path.getBoundingClientRect();
+                path.style.strokeDashoffset = Math.max(0, 200-to); 
+            } 
+        }
+    });
+
+    $('.body').on('click', '*[data-local-url] .player', function() {
+        player = $(this);
+        player.addClass('playing');
+        var aud = $(this).children('audio')[0];
+        var src = aud.src;
+        aud = $(aud).clone();
+        var name = $(this).siblings('h2')[0];
+        name = $(name).text();
+        $(aud).attr("data-name", name);
+        var plAudio = $('#current-playlist').children('audio')[0];
+        var destSrc;
+        if (typeof plAudio  !== "undefined") {
+            destSrc = plAudio.src;
+        }
+        if (src !== destSrc){
             $('.player__icon--pause').css('display','none');
             $('.player__icon--play').css('display','block');
             $(this).find('.player__icon--play').css('display','none');
             $(this).find('.player__icon--pause').css('display','block');
-            // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+            $('.player--main .player__icon--play').css('display','none');
+            $('.player--main .player__icon--pause').css('display','block');
+            $('#current-playlist').html('');
+            $('#current-playlist').append(aud);
+            aud = $('#current-playlist').children('audio')[0];
+            aud.play();
+            if (playingAudio && playingAudio !== aud) {
+                playingAudio.currentTime = 0;
+                playingAudio.pause();
+            }
             playingAudio = aud;
+            addSongName($(aud).data('name'));
         }
         else {
-            aud.pause();
-            $(this).find('.player__icon--pause').css('display','none');
-            $(this).find('.player__icon--play').css('display','block');
-            // $('.player__playicon').html('▶');
+            if (typeof plAudio  !== "undefined") {
+                aud = plAudio;
+            }
+            // console.log('test');
+            // aud.pause();
+            // $(this).find('.player__icon--pause').css('display','none');
+            // $(this).find('.player__icon--play').css('display','block');
+            if (aud.paused) {
+                aud.play();
+                $('.player__icon--pause').css('display','none');
+                $('.player__icon--play').css('display','block');
+                $(this).find('.player__icon--play').css('display','none');
+                $(this).find('.player__icon--pause').css('display','block');
+                $('.player--main .player__icon--play').css('display','none');
+                $('.player--main .player__icon--pause').css('display','block');
+                // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+                playingAudio = aud;
+            }
+            else {
+                aud.pause();
+                $(this).find('.player__icon--pause').css('display','none');
+                $(this).find('.player__icon--play').css('display','block');
+                $('.player--main .player__icon--pause').css('display','none');
+                $('.player--main .player__icon--play').css('display','block');
+                // $('.player__playicon').html('▶');
+            }
         }
-        let path = $(this).find('path.player__progressbar')[0];
+        // if (aud.paused){
+        //     aud.play();
+        // }
+        // else {
+        //     aud.pause();
+        // }
+        let playerpath = $(this).find('path.player__progressbar')[0];
+        let mainplayerpath = $('.player--main path.player__progressbar')[0];
         aud.ontimeupdate = function(){
             let value = aud.currentTime / aud.duration * 100
-            let length = path.getTotalLength();
+            let length = playerpath.getTotalLength();
             let to = length *( value / 100);
             // Trigger Layout in Safari Hack 
             // https://jakearchibald.com/2013/animated-line-drawing-svg/
-            path.getBoundingClientRect();
-            path.style.strokeDashoffset = Math.max(0, 200-to); 
+            playerpath.getBoundingClientRect();
+            playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
+            mainplayerpath.getBoundingClientRect();
+            mainplayerpath.style.strokeDashoffset = Math.max(0, 200-to); 
         } 
     });
     
- 
+
+    function addSongName(name){
+        $('.song-title').text(name);
+        defilingText();
+    }
+
+    function defilingText() {
+        $('.song-title').removeClass('defiling');
+        if ($('.song-title').width() >= $('.now-playing').width()) {
+            $('.song-title').addClass('defiling');
+        }
+    }
+
+    function initMainPlayer(){
+        let aud = $('#current-playlist').children('audio')[0];
+        if (aud.paused) {
+
+        }
+        else {
+            $('.player--main .player__icon--play').css('display','none');
+            $('.player--main .player__icon--pause').css('display','block');
+        }
+        if (typeof $(aud).data('name')  !== "undefined") {
+            $('.song-title').text($(aud).data('name'));
+        }
+        defilingText();
+        console.log($(aud).data('name'));
+        let playerpath = $('.player--main path.player__progressbar')[1];
+        aud.ontimeupdate = function(){
+            let value = aud.currentTime / aud.duration * 100
+            let length = playerpath.getTotalLength();
+            let to = length *( value / 100);
+            // Trigger Layout in Safari Hack 
+            // https://jakearchibald.com/2013/animated-line-drawing-svg/
+            playerpath.getBoundingClientRect();
+            playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
+        } 
+    }
+
+    let headerPadding = parseInt($('.header').css('margin-top'));
     barba.init({
         cacheIgnore: true,
         views: [{
             namespace: 'home',
             beforeEnter() {
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-                // update the menu based on user navigation
+                if (window.pageYOffset > headerPadding){
+                    document.body.scrollTop = headerPadding; // For Safari
+                    document.documentElement.scrollTop = headerPadding; // For Chrome, Firefox, IE and Opera
+                }
+                else {
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                }
                 $('.player__icon--pause').css('display','none'); 
                 // loadingAnim();
+                // initMainPlayer();
+                initMainPlayer();
             },
             afterEnter() {
                 // refresh the parallax based on new page content
@@ -159,9 +294,15 @@ $(function() {
         {
             namespace: 'page',
             beforeEnter(){
+                if (window.pageYOffset > headerPadding){
+                    document.body.scrollTop = headerPadding; // For Safari
+                    document.documentElement.scrollTop = headerPadding; // For Chrome, Firefox, IE and Opera
+                }
+                else {
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                }
                 $('.player__icon--pause').css('display','none'); 
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 //launching deezer API
                 // TODO : penser aux projets pas présents sur deezer
                 window.dzAsyncInit($('.article'));
@@ -169,6 +310,9 @@ $(function() {
                 // $('.article').forEach(article => {
                 //     window.dzAsyncInit(article);
                 // })
+                initMainPlayer();
+            },
+            afterEnter(){
             }
         }],
         transitions: [{
