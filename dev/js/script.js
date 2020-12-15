@@ -87,7 +87,7 @@ window.dzAsyncInit = function(articles) {
                 $(article).find('.article__main').append(domElement);
                 // console.log($('.main'))
                 player.init();
-                $('.player__icon--pause').css('display','none'); 
+                $(article).find('.player__icon--pause').css('display','none'); 
             });
         });
     });
@@ -228,6 +228,82 @@ $(function() {
         } 
     });
     
+    $('.body').on('click', '*[data-article-url] .player', function() {
+        player = $(this);
+        player.addClass('playing');
+        var aud = $(this).children('audio')[0];
+        // var src = aud.src;
+        // aud = $(aud).clone();
+        // var name = $(this).siblings('h2')[0];
+        // name = $(name).text();
+        // $(aud).attr("data-name", name);
+        // var plAudio = $('#current-playlist').children('audio')[0];
+        // var destSrc;
+        // if (typeof plAudio  !== "undefined") {
+        //     destSrc = plAudio.src;
+        // }
+        // if (src !== destSrc){
+        //     $('.player__icon--pause').css('display','none');
+        //     $('.player__icon--play').css('display','block');
+        //     $(this).find('.player__icon--play').css('display','none');
+        //     $(this).find('.player__icon--pause').css('display','block');
+        //     $('.player--main .player__icon--play').css('display','none');
+        //     $('.player--main .player__icon--pause').css('display','block');
+        //     $('#current-playlist').html('');
+        //     $('#current-playlist').append(aud);
+        //     aud = $('#current-playlist').children('audio')[0];
+        // aud.play();
+        if (playingAudio && playingAudio !== aud) {
+            playingAudio.pause();
+            if ($(playingAudio).parents('.article').length){
+                // console.log('wesh');
+                playingAudio.currentTime = 0;
+                playingAudio = aud;
+            }
+        }
+        //     addSongName($(aud).data('name'));
+        // }
+        // else {
+            // if (typeof plAudio  !== "undefined") {
+            //     aud = plAudio;
+            // }
+            // console.log('test');
+            // aud.pause();
+            // $(this).find('.player__icon--pause').css('display','none');
+            // $(this).find('.player__icon--play').css('display','block');
+        if (aud.paused) {
+            aud.play();
+            $('.player__icon--pause').css('display','none');
+            $('.player__icon--play').css('display','block');
+            $(this).find('.player__icon--play').css('display','none');
+            $(this).find('.player__icon--pause').css('display','block');
+            // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
+            playingAudio = aud;
+        }
+        else {
+            aud.pause();
+            $(this).find('.player__icon--pause').css('display','none');
+            $(this).find('.player__icon--play').css('display','block');
+            // $('.player__playicon').html('▶');
+        }
+        // }
+        // if (aud.paused){
+        //     aud.play();
+        // }
+        // else {
+        //     aud.pause();
+        // }
+        let playerpath = $(this).find('path.player__progressbar')[0];
+        aud.ontimeupdate = function(){
+            let value = aud.currentTime / aud.duration * 100
+            let length = playerpath.getTotalLength();
+            let to = length *( value / 100);
+            // Trigger Layout in Safari Hack 
+            // https://jakearchibald.com/2013/animated-line-drawing-svg/
+            playerpath.getBoundingClientRect();
+            playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
+        } 
+    });
 
     function addSongName(name){
         $('.song-title').text(name);
@@ -244,7 +320,14 @@ $(function() {
     function initMainPlayer(){
         let aud = $('#current-playlist').children('audio')[0];
         if (aud.paused) {
-
+            let playerpath = $('.player--main path.player__progressbar')[1];
+            let value = aud.currentTime / aud.duration * 100
+            let length = playerpath.getTotalLength();
+            let to = length *( value / 100);
+            // Trigger Layout in Safari Hack 
+            // https://jakearchibald.com/2013/animated-line-drawing-svg/
+            playerpath.getBoundingClientRect();
+            playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
         }
         else {
             $('.player--main .player__icon--play').css('display','none');

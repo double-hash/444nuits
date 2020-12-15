@@ -24,22 +24,81 @@
                 </h1>
                 <p class="sous-titre">KLM • Népal • 444</p>
             </div>
+            <div class="player player--main">
+                <div class="player__btn">
+                    <div class="player__icon player__icon--prev"></div><svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" ><style>.player__progressbar{fill:none;stroke-miterlimit:round;transition:stroke-dashoffset 500ms ease-in-out;stroke-dasharray:200;stroke-dashoffset:200}</style><path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/></svg>
+                </div>
+                <div class="player__btn player__btn--play">
+                    <div class="player__icon player__icon--play">
+                    </div> 
+                    <div class="player__icon player__icon--pause" >
+                    </div>               
+                    <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                        <style>
+                            .player__progressbar {
+                                fill: none;
+                                stroke-miterlimit: round;
+                                transition: stroke-dashoffset 50ms ease-in-out;
+                                stroke-dasharray: 200; 
+                                stroke-dashoffset: 200;
+                            }
+                        </style>
+                        <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                        <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                        <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                    </svg>
+                </div>
+                <div class="player__btn">
+                    <div class="player__icon player__icon--next"></div><svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" ><style>.player__progressbar{fill:none;stroke-miterlimit:round;transition:stroke-dashoffset 500ms ease-in-out;stroke-dasharray:200;stroke-dashoffset:200}</style><path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/></svg>
+                </div>
+                <div class="now-playing">
+                    <p class="song-title"></p>
+                </div>
+            </div>
         </header>
         <main class="main">
-            <article class="article article--album">
+            <article class="article article--album" data-local-url="./files/tracks/grandmaster-splinter-medley-vol1.mp3">
                 <header class="article__header">
                     <img src="./assets/img/grandmastersplinter.png" alt="">
                     <div class="article__infos">
                         <h1>Medley Vol. 01</h1>
                         <p>Face B: Dilated Peoples&nbsp;-&nbsp;CLockwork, Outkast&nbsp;-&nbsp;Git up Git out, La Rumeur&nbsp;-&nbsp;Pas de justice pas de paix, The Notorious B.I.G.&nbsp;-&nbsp;Kick in the door, Bonobo&nbsp;-&nbsp;Between the lines</p>
                         <p>Medley - 4.50 min - 2012</p>
-                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=1JpR6RpkFu4">ici</a></p>
+                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=1JpR6RpkFu4" target="_blank">ici</a></p>
                     </div>
                 </header>
                 <ul class="article__main">
+                    <li class="article__item">
+                        <h2>Medley Vol. 01</h2>
+                        <div class="points"></div>
+                        <p>04:50</p>
+                        <div class="player">
+                            <div class="player__btn">
+                                <div class="player__icon player__icon--play">
+                                </div> 
+                                <div class="player__icon player__icon--pause" >
+                                </div>               
+                                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                                    <style>
+                                        .player__progressbar {
+                                            fill: none;
+                                            stroke-miterlimit: round;
+                                            transition: stroke-dashoffset 500ms ease-in-out;
+                                            stroke-dasharray: 200; 
+                                            stroke-dashoffset: 200;
+                                        }
+                                    </style>
+                                    <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                                </svg>
+                            </div>
+                            <audio src="./files/tracks/grandmaster-splinter-medley-vol1.mp3" ></audio>
+                        </div>
+                    </li>
                 </ul>
             </article>
-            <article class="article article--album">
+            <article class="article article--album" data-local-url="./files/tracks/grandmaster-splinter-medley-vol2.mp3">
                 <header class="article__header">
                     <img src="./assets/img/grandmastersplinter.png" alt="">
                     <div class="article__infos">
@@ -47,13 +106,41 @@
                         <p>Face B: Outkast - Decatur Psalm, Jamal - Fades ‘Em All (Pete Rock Rmx), Joey Chavez - The Chill, Grand Pubah - I Like It</p>
                         <p>Scratch: A little Rooster</p>
                         <p>Medley - 4.52 min - 2012</p>
-                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=V4Gw_EcfsQg">ici</a></p>
+                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=V4Gw_EcfsQg" target="_blank">ici</a></p>
                     </div>
                 </header>
                 <ul class="article__main">
+                    <li class="article__item">
+                        <h2>Medley Vol. 02</h2>
+                        <div class="points"></div>
+                        <p>04:52</p>
+                        <div class="player">
+                            <div class="player__btn">
+                                <div class="player__icon player__icon--play">
+                                </div> 
+                                <div class="player__icon player__icon--pause" >
+                                </div>               
+                                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                                    <style>
+                                        .player__progressbar {
+                                            fill: none;
+                                            stroke-miterlimit: round;
+                                            transition: stroke-dashoffset 500ms ease-in-out;
+                                            stroke-dasharray: 200; 
+                                            stroke-dashoffset: 200;
+                                        }
+                                    </style>
+                                    <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                                </svg>
+                            </div>
+                            <audio src="./files/tracks/grandmaster-splinter-medley-vol2.mp3" ></audio>
+                        </div>
+                    </li>
                 </ul>
             </article>
-            <article class="article article--album">
+            <article class="article article--album" data-local-url="./files/tracks/grandmaster-splinter-medley-vol-3.mp3">
                 <header class="article__header">
                     <img src="./assets/img/grandmastersplinter.png" alt="">
                     <div class="article__infos">
@@ -62,10 +149,38 @@
                         <p>Face B: ...</p>
                         <p>Scratch: A little Rooster & Dj Cerk</p>
                         <p>Medley - 5.42 min - 2014</p>
-                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=T-UvKdZBgGs">ici</a></p>
+                        <p class="article__infos--push">Disponible <a href="https://www.youtube.com/watch?v=T-UvKdZBgGs" target="_blank">ici</a></p>
                     </div>
                 </header>
                 <ul class="article__main">
+                    <li class="article__item">
+                        <h2>Medley Vol. 03</h2>
+                        <div class="points"></div>
+                        <p>05:42</p>
+                        <div class="player">
+                            <div class="player__btn">
+                                <div class="player__icon player__icon--play">
+                                </div> 
+                                <div class="player__icon player__icon--pause" >
+                                </div>               
+                                <svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" >
+                                    <style>
+                                        .player__progressbar {
+                                            fill: none;
+                                            stroke-miterlimit: round;
+                                            transition: stroke-dashoffset 500ms ease-in-out;
+                                            stroke-dasharray: 200; 
+                                            stroke-dashoffset: 200;
+                                        }
+                                    </style>
+                                    <path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <path class="player__progressbar" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/>
+                                    <!-- <ellipse class="meter" ry="22.5" rx="22.5" id="svg_1" cy="25" cx="25" stroke-width="1.5" stroke="#000" fill="#fff"/> -->
+                                </svg>
+                            </div>
+                            <audio src="./files/tracks/grandmaster-splinter-medley-vol-3.mp3" ></audio>
+                        </div>
+                    </li>
                 </ul>
             </article>
         </main>
@@ -89,6 +204,9 @@
                 <p>Ce site a été crée par la famille et les proches de Népal afin de faire vivre son oeuvre pour toujours.</p>         
             </div>
         </footer>
+    </div>
+    <div id="current-playlist">
+        <audio src="assets/prods/prod1.mp3"></audio>
     </div>
     <script src="js/script.js"></script>
 </body>
