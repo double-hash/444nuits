@@ -708,6 +708,9 @@ body.loading {
         overflow: hidden;
         white-space: nowrap;
     }
+    .now-playing p{
+        display: inline-block;
+    }
     .defiling {
         animation: textAnim 5s linear infinite;
     }
