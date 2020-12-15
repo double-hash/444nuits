@@ -66,10 +66,9 @@ window.dzAsyncInit = function(articles) {
         var article = value;
         let id = $(article).data("article-url");
         let rUrl = $(article).data("redirect-url");
-        // console.log(id + " " + rUrl);
-        // Get data from /album/120441792/tracks
+        // Get data from /album/**articleID**/tracks
         DZ.api(id, function(response){
-            console.log(response);
+            // console.log(response);
             response.data.forEach(element => {
                 var duration = {
                     minutes : 0,
@@ -126,7 +125,7 @@ $(function() {
                 $(this).find('.player__icon--play').css('display','none');
                 $(this).find('.player__icon--pause').css('display','block');
                 // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
-                playingAudio = aud;
+                // playingAudio = aud;
             }
             else {
                 aud.pause();
@@ -337,7 +336,7 @@ $(function() {
             $('.song-title').text($(aud).data('name'));
         }
         defilingText();
-        console.log($(aud).data('name'));
+        // console.log($(aud).data('name'));
         let playerpath = $('.player--main path.player__progressbar')[1];
         aud.ontimeupdate = function(){
             let value = aud.currentTime / aud.duration * 100

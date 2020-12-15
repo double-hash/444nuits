@@ -337,13 +337,13 @@ body.loading {
 
 @keyframes textAnim {
     0% {
-        transform:translateX(100%);
+        transform:translateX(50%);
     }
     /* 66% {
         transform:translateX(-50%);
     } */
     100% {
-        transform:translateX(-100%);
+        transform:translateX(-90%);
     }
 }
 
@@ -555,6 +555,49 @@ body.loading {
         padding: 20px 0;
         margin:40px 0 60px;
     }
+    .player--main {
+        position: fixed;
+        box-sizing: border-box;
+        z-index: 40;
+        background:#fAfAfA;
+        display: flex;
+        align-items: center;
+        /* top:50%;
+        transform:translateY(-50%); */
+        bottom:0;
+        left:0;
+        width: 100%;
+        padding: var(--gutter-width);
+        /* max-width: 200px; */
+        /* align-self: flex-end; */
+        /* margin-bottom:0.5em; */
+    }
+    .player--main .player__btn {
+        order:2;
+        width:35px;
+        height:35px;
+        margin-left:var(--gutter-width);
+    }
+    .player--main .now-playing {
+        display: inline-block;
+        order:1;
+        flex:1;
+        font-size: 1.2em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align:left;
+        /* vertical-align: baseline; */
+    }
+    .player--main .now-playing p {
+        display: inline-block;
+        /* transform:translateX(10%); */
+    }
+    .player--main:hover .now-playing p {
+        /* text-overflow: ellipsis; */
+    }
+    .defiling {
+        animation: textAnim 5s linear infinite;
+    }
     .header .titre{
         /* font-size:2em; */
     }
@@ -615,6 +658,9 @@ body.loading {
     .article__video {
         margin-bottom: 50px;
     }
+    .footer {
+        padding-bottom:100px;
+    }
     .footer__infos {
         margin-top: 15px;
         text-align: center;
@@ -644,7 +690,8 @@ body.loading {
         /* top:50%;
         transform:translateY(-50%); */
         right:var(--col-width);
-        width: calc(var(--col-width));
+        width: calc(var(--col-width) * 2);
+        max-width: 200px;
         align-self: flex-end;
         margin-bottom:0.5em;
     }
@@ -658,16 +705,8 @@ body.loading {
     .now-playing{
         min-height: 1em;
         margin-top:0.3em;
-        /* overflow: hidden; */
-        white-space: nowrap;
         overflow: hidden;
-    }
-    .now-playing p {
-        display: inline-block;
-        /* transform:translateX(10%); */
-    }
-    .player--main:hover .now-playing p {
-        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .defiling {
         animation: textAnim 5s linear infinite;
