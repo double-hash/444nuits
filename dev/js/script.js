@@ -113,21 +113,28 @@ $(function() {
             
             var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
             var next = $(aud).next()[0];
-            $('#current-playlist audio').attr('data-playing','false');
-            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
             
             // aud.currentTime = 0;
             aud.pause();
-            next.play();
+            if (typeof next !== "undefined") {
+                next.play();
+                $('.player--main .player__icon--play').css('display', 'none');
+                $('.player--main .player__icon--pause').css('display', 'block');
+            }
+            else {
+                next = $('#current-playlist').children('audio')[0];
+                $('.player--main .player__icon--pause').css('display', 'none');
+                $('.player--main .player__icon--play').css('display', 'block');
+            }
+            
+            $('#current-playlist audio').attr('data-playing','false');
+            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
             
             if (typeof playingAudio !== "undefined") {
                 playingAudio.currentTime = 0;
                 playingAudio.pause();
             }
             
-            $('.player--main .player__icon--play').css('display', 'none');
-            $('.player--main .player__icon--pause').css('display', 'block');
-
             updatePagePlayer(aud);
             updatePagePlayer(next);
 
@@ -142,6 +149,18 @@ $(function() {
             
             var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
             var next = $(aud).prev()[0];
+            
+            aud.pause();
+            if(typeof next == "undefined"){
+                next = $('#current-playlist').children('audio')[0];
+                $('.player--main .player__icon--pause').css('display', 'none');
+                $('.player--main .player__icon--play').css('display', 'block');
+            }
+            else {
+                next.play();
+                $('.player--main .player__icon--play').css('display', 'none');
+                $('.player--main .player__icon--pause').css('display', 'block');
+            }
             // console.log(next);
             $('#current-playlist audio').attr('data-playing','false');
             $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
@@ -150,8 +169,8 @@ $(function() {
             // console.log(aud);
             // aud.currentTime = 0;
             
-            aud.pause();
-            next.play();
+            // aud.pause();
+            // next.play();
             
             if (typeof playingAudio !== "undefined") {
                 playingAudio.currentTime = 0;
@@ -161,8 +180,6 @@ $(function() {
             updatePagePlayer(aud);
             updatePagePlayer(next);
 
-            $('.player--main .player__icon--play').css('display', 'none');
-            $('.player--main .player__icon--pause').css('display', 'block');
 
             
             // playingAudio = next;
@@ -385,29 +402,45 @@ $(function() {
     }
 
     function updateAudio(aud){
+        let next;
         playingAudio = aud;
         aud.addEventListener('ended',function(){
             //play next song
             // var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            var next = $(aud).next()[0];
+            if(typeof aud == "undefined"){
+                aud = $('#current-playlist').children('audio')[0];
+                aud.pause();
+            }
+            else {
+                next = $(aud).next()[0];
+                // aud.currentTime = 0;
+                aud.pause();
+            }
+            
+            $('.player--main .player__icon--play').css('display', 'none');
+            $('.player--main .player__icon--pause').css('display', 'block');
+            
+            if(typeof next == "undefined"){
+                next = $('#current-playlist').children('audio')[0];
+                $('.player--main .player__icon--play').css('display', 'block');
+                $('.player--main .player__icon--pause').css('display', 'none');
+            }
+            else {
+                next.play();
+            }
+
             $('#current-playlist audio').attr('data-playing','false');
             $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
-            
-            // aud.currentTime = 0;
-            aud.pause();
-            next.play();
             
             if (typeof playingAudio !== "undefined") {
                 playingAudio.currentTime = 0;
                 playingAudio.pause();
             }
             
-            $('.player--main .player__icon--play').css('display', 'none');
-            $('.player--main .player__icon--pause').css('display', 'block');
     
+            updateAudio(next);
             updatePagePlayer(aud);
             updatePagePlayer(next);
-            updateAudio(next);
     
             addSongName($(next).data('name'));
         });

@@ -336,14 +336,16 @@ body.loading {
 }
 
 @keyframes textAnim {
-    0% {
-        transform:translateX(50%);
+    /* 0% {
+    } */
+    25% {
+        transform:translateX(0%);
     }
     /* 66% {
         transform:translateX(-50%);
     } */
     100% {
-        transform:translateX(-90%);
+        transform:translateX(-100%);
     }
 }
 
@@ -709,7 +711,6 @@ body.loading {
         width: calc(var(--col-width) * 2);
         max-width: 200px;
         align-self: flex-end;
-        margin-bottom:0.5em;
     }
     .player--main > .player__btn {
         opacity:0.4;
@@ -722,9 +723,10 @@ body.loading {
         opacity:0;
         transition: opacity 0.5s ease-in-out;
         min-height: 1em;
-        margin-top:0.3em;
+        margin-top:0.4em;
         overflow: hidden;
         white-space: nowrap;
+        /* margin-bottom:0.2em; */
     }
     .now-playing p{
         display: inline-block;
