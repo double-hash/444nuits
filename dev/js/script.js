@@ -104,36 +104,103 @@ $(function() {
     // }
     $('.player__icon--pause').css('display','none'); 
     let playingAudio;
+    let needNewPlaylist = true;
+    
     $('.body').on('click', '.player--main', function(e) {
+        // console.log(playingAudio);
         if ($(e.target).hasClass('player__icon--next')) {
-            console.log('next');
+            // console.log('next');
+            
+            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+            var next = $(aud).next()[0];
+            $('#current-playlist audio').attr('data-playing','false');
+            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
+            
+            // aud.currentTime = 0;
+            aud.pause();
+            next.play();
+            
+            if (typeof playingAudio !== "undefined") {
+                playingAudio.currentTime = 0;
+                playingAudio.pause();
+            }
+            
+            $('.player--main .player__icon--play').css('display', 'none');
+            $('.player--main .player__icon--pause').css('display', 'block');
+
+            updatePagePlayer(aud);
+            updatePagePlayer(next);
+
+            // playingAudio = next;
+            updateAudio(next);
+
+            addSongName($(next).data('name'));
+
         }
         else if ($(e.target).hasClass('player__icon--prev')) {
-            console.log('pprev');
+            // console.log('pprev');
+            
+            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+            var next = $(aud).prev()[0];
+            // console.log(next);
+            $('#current-playlist audio').attr('data-playing','false');
+            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
+            
+            
+            // console.log(aud);
+            // aud.currentTime = 0;
+            
+            aud.pause();
+            next.play();
+            
+            if (typeof playingAudio !== "undefined") {
+                playingAudio.currentTime = 0;
+                playingAudio.pause();
+            }
+            
+            updatePagePlayer(aud);
+            updatePagePlayer(next);
+
+            $('.player--main .player__icon--play').css('display', 'none');
+            $('.player--main .player__icon--pause').css('display', 'block');
+
+            
+            // playingAudio = next;
+            updateAudio(next);
+
+            addSongName($(next).data('name'));
+
         }
         else if ($(e.target).hasClass('player__icon--play') || $(e.target).hasClass('player__icon--pause')){
             player = $(this);
-            var aud = $('#current-playlist').children('audio')[0];
+            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+            // console.log(aud.src)
+            var pAud = $('*[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
+            // console.log(pAud);
+            
+            let pPath;
             if (aud.paused) {
-                if (playingAudio && playingAudio !== aud) {
-                    playingAudio.currentTime = 0;
-                    playingAudio.pause();
-                }
                 aud.play();
                 $('.player__icon--pause').css('display','none');
                 $('.player__icon--play').css('display','block');
                 $(this).find('.player__icon--play').css('display','none');
                 $(this).find('.player__icon--pause').css('display','block');
-                // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
-                // playingAudio = aud;
+                // console.log($(pAud).siblings('.player__btn').find('.player__icon--pause'));
+                if (typeof pAud !== "undefined") {
+                    $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
+                    $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
+                }
             }
             else {
                 aud.pause();
+                $('.player__icon--pause').css('display','none');
+                $('.player__icon--play').css('display','block');
                 $(this).find('.player__icon--pause').css('display','none');
                 $(this).find('.player__icon--play').css('display','block');
                 // $('.player__playicon').html('▶');
             }
             let path = $(this).find('path.player__progressbar')[0];
+            pPath = $(pAud).siblings('.player__btn').find('path.player__progressbar')[0];
             aud.ontimeupdate = function(){
                 let value = aud.currentTime / aud.duration * 100
                 let length = path.getTotalLength();
@@ -142,24 +209,39 @@ $(function() {
                 // https://jakearchibald.com/2013/animated-line-drawing-svg/
                 path.getBoundingClientRect();
                 path.style.strokeDashoffset = Math.max(0, 200-to); 
+                if (typeof pPath !== "undefined") {
+                    pPath.getBoundingClientRect();
+                    pPath.style.strokeDashoffset = Math.max(0, 200-to); 
+                }
             } 
         }
     });
 
     $('.body').on('click', '*[data-local-url] .player', function() {
         player = $(this);
-        player.addClass('playing');
+        $('.player--main').addClass('playing');
         var aud = $(this).children('audio')[0];
-        var src = aud.src;
-        aud = $(aud).clone();
-        var name = $(this).siblings('h2')[0];
-        name = $(name).text();
-        $(aud).attr("data-name", name);
-        var plAudio = $('#current-playlist').children('audio')[0];
-        var destSrc;
-        if (typeof plAudio  !== "undefined") {
-            destSrc = plAudio.src;
+        
+        if (needNewPlaylist == true) {
+            var playlist = $('[data-local-url] .player audio');
+            playlist = $(playlist).clone();
+            
+            $('#current-playlist').html('');
+            $("#current-playlist").append(playlist);
+            needNewPlaylist = false;
         }
+
+        $('#current-playlist audio').attr('data-playing','false');
+        $('#current-playlist audio[src="' + $(aud).attr('src') + '"]').attr('data-playing','true');
+
+        aud = $('#current-playlist audio[data-playing="true"]')[0];
+        var src = $(aud).attr('src');
+        var destSrc;
+        
+        if (typeof playingAudio  !== "undefined") {
+            destSrc = $(playingAudio).attr('src');
+        }
+        // console.log(src, destSrc);
         if (src !== destSrc){
             $('.player__icon--pause').css('display','none');
             $('.player__icon--play').css('display','block');
@@ -167,26 +249,17 @@ $(function() {
             $(this).find('.player__icon--pause').css('display','block');
             $('.player--main .player__icon--play').css('display','none');
             $('.player--main .player__icon--pause').css('display','block');
-            $('#current-playlist').html('');
-            $('#current-playlist').append(aud);
-            aud = $('#current-playlist').children('audio')[0];
             aud.play();
-            if (playingAudio && playingAudio !== aud) {
-                playingAudio.currentTime = 0;
-                playingAudio.pause();
-            }
-            playingAudio = aud;
-            addSongName($(aud).data('name'));
         }
         else {
-            if (typeof plAudio  !== "undefined") {
-                aud = plAudio;
+            if (aud.paused == false) {
+                aud.pause();
+                $(this).find('.player__icon--pause').css('display','none');
+                $(this).find('.player__icon--play').css('display','block');
+                $('.player--main .player__icon--pause').css('display','none');
+                $('.player--main .player__icon--play').css('display','block');
             }
-            // console.log('test');
-            // aud.pause();
-            // $(this).find('.player__icon--pause').css('display','none');
-            // $(this).find('.player__icon--play').css('display','block');
-            if (aud.paused) {
+            else {
                 aud.play();
                 $('.player__icon--pause').css('display','none');
                 $('.player__icon--play').css('display','block');
@@ -194,24 +267,19 @@ $(function() {
                 $(this).find('.player__icon--pause').css('display','block');
                 $('.player--main .player__icon--play').css('display','none');
                 $('.player--main .player__icon--pause').css('display','block');
-                // $('.player__playicon').html('&#9614;&nbsp;&#9614;');
-                playingAudio = aud;
-            }
-            else {
-                aud.pause();
-                $(this).find('.player__icon--pause').css('display','none');
-                $(this).find('.player__icon--play').css('display','block');
-                $('.player--main .player__icon--pause').css('display','none');
-                $('.player--main .player__icon--play').css('display','block');
-                // $('.player__playicon').html('▶');
             }
         }
-        // if (aud.paused){
-        //     aud.play();
-        // }
-        // else {
-        //     aud.pause();
-        // }
+        
+        if (playingAudio && playingAudio !== aud) {
+            playingAudio.currentTime = 0;
+            playingAudio.pause();
+        }
+        
+        addSongName($(aud).data('name'));
+  
+        // playingAudio = aud;
+        updateAudio(aud);
+        
         let playerpath = $(this).find('path.player__progressbar')[0];
         let mainplayerpath = $('.player--main path.player__progressbar')[0];
         aud.ontimeupdate = function(){
@@ -316,8 +384,71 @@ $(function() {
         }
     }
 
+    function updateAudio(aud){
+        playingAudio = aud;
+        aud.addEventListener('ended',function(){
+            //play next song
+            // var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+            var next = $(aud).next()[0];
+            $('#current-playlist audio').attr('data-playing','false');
+            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
+            
+            // aud.currentTime = 0;
+            aud.pause();
+            next.play();
+            
+            if (typeof playingAudio !== "undefined") {
+                playingAudio.currentTime = 0;
+                playingAudio.pause();
+            }
+            
+            $('.player--main .player__icon--play').css('display', 'none');
+            $('.player--main .player__icon--pause').css('display', 'block');
+    
+            updatePagePlayer(aud);
+            updatePagePlayer(next);
+            updateAudio(next);
+    
+            addSongName($(next).data('name'));
+        });
+    }
+
+    function updatePagePlayer(aud){
+        var src = $(aud).attr('src');
+        var pAud = $('[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
+
+        mainplayerpath = $('.player--main path.player__progressbar')[0];
+
+        $('.player__progressbar').each(function(){
+            this.getBoundingClientRect();
+            this.style.strokeDashoffset = Math.max(0, 200); 
+        })
+
+        if (typeof pAud !== "undefined") {
+            $('.article .player__icon--play').css('display','block');
+            $('.article .player__icon--pause').css('display','none');
+            $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
+            $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
+            pPath = $(pAud).siblings('.player__btn').find('path.player__progressbar')[0];
+
+            aud.ontimeupdate = function(){
+                let value = aud.currentTime / aud.duration * 100
+                let length = mainplayerpath.getTotalLength();
+                let to = length *( value / 100);
+                // Trigger Layout in Safari Hack 
+                // https://jakearchibald.com/2013/animated-line-drawing-svg/
+                if (typeof pPath !== "undefined") {
+                        pPath.getBoundingClientRect();
+                        pPath.style.strokeDashoffset = Math.max(0, 200-to); 
+                }
+                mainplayerpath.getBoundingClientRect();
+                mainplayerpath.style.strokeDashoffset = Math.max(0, 200-to); 
+            } 
+        }
+    }
+
     function initMainPlayer(){
-        let aud = $('#current-playlist').children('audio')[0];
+        let aud = $('#current-playlist audio[data-playing="true"]')[0];
         if (aud.paused) {
             let playerpath = $('.player--main path.player__progressbar')[1];
             let value = aud.currentTime / aud.duration * 100
@@ -326,11 +457,13 @@ $(function() {
             // Trigger Layout in Safari Hack 
             // https://jakearchibald.com/2013/animated-line-drawing-svg/
             playerpath.getBoundingClientRect();
-            playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
+            playerpath.style.strokeDashoffset = Math.max(0, 200-to);
+            $('.player--main').addClass('playing'); 
         }
         else {
             $('.player--main .player__icon--play').css('display','none');
             $('.player--main .player__icon--pause').css('display','block');
+            $('.player--main').addClass('playing');
         }
         if (typeof $(aud).data('name')  !== "undefined") {
             $('.song-title').text($(aud).data('name'));
@@ -395,6 +528,7 @@ $(function() {
                 initMainPlayer();
             },
             afterEnter(){
+                needNewPlaylist = true;
             }
         }],
         transitions: [{
