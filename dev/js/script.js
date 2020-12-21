@@ -3,7 +3,13 @@ let headerHeight;
 function loadingAnim(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    var headerInnerHeight = $('.header').innerHeight();
     headerHeight = $('.header').outerHeight(true);
+    var loaderPadding = headerHeight - headerInnerHeight;
+    // console.log(headerHeight);
+    // console.log(headerInnerHeight);
+    // console.log(loaderPadding);
+    // $('.loader').css('height', 'calc(100vh - ' + loaderPadding + 'px)')
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
     $('.body').addClass('loading');
@@ -40,8 +46,9 @@ function loadingAnim(){
                     delay:0.7,
                     opacity: 0,
                     ease: 'Power1.in',
-                    onComplete : function() {                            $('.loading-screen').css('display', 'none');
+                    onComplete : function() {                            
                         $('.loading-screen').css('display', 'none');
+                    // $('.loading-screen').css('display', 'none');
                     }
                 });
             }
@@ -153,13 +160,18 @@ $(function() {
         aud.pause();
         if (typeof next !== "undefined") {
             next.play();
-            navigator.mediaSession.playbackState = "playing";
+            
+            if ('mediaSession' in navigator) {
+                    navigator.mediaSession.playbackState = "playing";
+            }
             $('.player--main .player__icon--play').css('display', 'none');
             $('.player--main .player__icon--pause').css('display', 'block');
         }
         else {
             next = $('#current-playlist').children('audio')[0];
-            navigator.mediaSession.playbackState = "paused";
+            if ('mediaSession' in navigator) {
+                    navigator.mediaSession.playbackState = "paused";
+            }
             $('.player__icon--pause').css('display', 'none');
             $('.player__icon--play').css('display', 'block');
         }
@@ -190,13 +202,17 @@ $(function() {
                    aud.pause();
                    if(typeof next == "undefined"){
                        next = $('#current-playlist').children('audio')[0];
-                       navigator.mediaSession.playbackState = "paused";
+                       if ('mediaSession' in navigator) {
+                           navigator.mediaSession.playbackState = "paused";
+                       }
                        $('.player__icon--pause').css('display', 'none');
                        $('.player__icon--play').css('display', 'block');
                    }
                    else {
                        next.play();
-                       navigator.mediaSession.playbackState = "playing";
+                       if ('mediaSession' in navigator) {
+                            navigator.mediaSession.playbackState = "playing";
+                       }
                        $('.player--main .player__icon--play').css('display', 'none');
                        $('.player--main .player__icon--pause').css('display', 'block');
                    }
@@ -237,7 +253,9 @@ $(function() {
         let pPath;
         if (aud.paused) {
             aud.play();
-            navigator.mediaSession.playbackState = "playing";
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = "playing";
+            }
             $('.player__icon--pause').css('display','none');
             $('.player__icon--play').css('display','block');
             $('.player--main .player__icon--play').css('display','none');
@@ -250,7 +268,9 @@ $(function() {
         }
         else {
             aud.pause();
-            navigator.mediaSession.playbackState = "paused";
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = "paused";
+            }
             $('.player__icon--pause').css('display','none');
             $('.player__icon--play').css('display','block');
             // $('.player__playicon').html('▶');
