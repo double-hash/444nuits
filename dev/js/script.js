@@ -467,8 +467,8 @@ $(function() {
                     album: nowPlaying.album,
                     // artwork: $(cover).attr('src'),
                     artwork: [
-                    { src: '../assets/img/' + nowPlaying.cover +'--128-128.png' , sizes: '128x128', type: 'image/png' },
-                    { src:  '../assets/img/' + nowPlaying.cover +'.jpg', sizes: '512x512', type: 'image/jpg' },
+                    { src: './assets/img/' + nowPlaying.cover +'--128-128.png' , sizes: '128x128', type: 'image/png' },
+                    { src:  './assets/img/' + nowPlaying.cover +'.jpg', sizes: '512x512', type: 'image/jpg' },
                     ]
                 });
             }
