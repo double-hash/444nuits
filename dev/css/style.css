@@ -139,6 +139,7 @@ p+p {
 
 .header{
     width:100vw;
+    display: block;
     overflow: hidden;
     max-height: 100vh;
     background: white;
@@ -562,7 +563,7 @@ body.loading {
         /* height:calc(100vh); */
         overflow: hidden;
         top:0;
-        height:calc(100vh);
+        height:calc(100vh - 120px);
         /* min-height:calc(100vh); */
     }
     .header{
