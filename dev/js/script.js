@@ -105,144 +105,186 @@ $(function() {
     $('.player__icon--pause').css('display','none'); 
     let playingAudio;
     let needNewPlaylist = true;
+    let nowPlaying = {
+    }
     
+    if ('mediaSession' in navigator) {
+      
+        navigator.mediaSession.setActionHandler('play', function() { 
+            playPauseTrack();
+         });
+        navigator.mediaSession.setActionHandler('pause', function() { 
+            playPauseTrack();
+         });
+        // navigator.mediaSession.setActionHandler('stop', function() { /* Code excerpted. */ });
+        // navigator.mediaSession.setActionHandler('seekbackward', function() { /* Code excerpted. */ });
+        // navigator.mediaSession.setActionHandler('seekforward', function() { /* Code excerpted. */ });
+        // navigator.mediaSession.setActionHandler('seekto', function() { /* Code excerpted. */ });
+        navigator.mediaSession.setActionHandler('previoustrack', function() { 
+            prevTrack();
+         });
+        navigator.mediaSession.setActionHandler('nexttrack', function() {
+            nextTrack();
+         });
+        // navigator.mediaSession.setActionHandler('skipad', function() { /* Code excerpted. */ });
+      }
+
     $('.body').on('click', '.player--main', function(e) {
         // console.log(playingAudio);
         if ($(e.target).hasClass('player__icon--next')) {
-            // console.log('next');
-            
-            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            var next = $(aud).next()[0];
-            
-            // aud.currentTime = 0;
-            aud.pause();
-            if (typeof next !== "undefined") {
-                next.play();
-                $('.player--main .player__icon--play').css('display', 'none');
-                $('.player--main .player__icon--pause').css('display', 'block');
-            }
-            else {
-                next = $('#current-playlist').children('audio')[0];
-                $('.player--main .player__icon--pause').css('display', 'none');
-                $('.player--main .player__icon--play').css('display', 'block');
-            }
-            
-            $('#current-playlist audio').attr('data-playing','false');
-            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
-            
-            if (typeof playingAudio !== "undefined") {
-                playingAudio.currentTime = 0;
-                playingAudio.pause();
-            }
-            
-            updatePagePlayer(aud);
-            updatePagePlayer(next);
-
-            // playingAudio = next;
-            updateAudio(next);
-
-            addSongName($(next).data('name'));
-
+            nextTrack();
         }
         else if ($(e.target).hasClass('player__icon--prev')) {
-            // console.log('pprev');
-            
-            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            var next = $(aud).prev()[0];
-            
-            aud.pause();
-            if(typeof next == "undefined"){
-                next = $('#current-playlist').children('audio')[0];
-                $('.player--main .player__icon--pause').css('display', 'none');
-                $('.player--main .player__icon--play').css('display', 'block');
-            }
-            else {
-                next.play();
-                $('.player--main .player__icon--play').css('display', 'none');
-                $('.player--main .player__icon--pause').css('display', 'block');
-            }
-            // console.log(next);
-            $('#current-playlist audio').attr('data-playing','false');
-            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
-            
-            
-            // console.log(aud);
-            // aud.currentTime = 0;
-            
-            // aud.pause();
-            // next.play();
-            
-            if (typeof playingAudio !== "undefined") {
-                playingAudio.currentTime = 0;
-                playingAudio.pause();
-            }
-            
-            updatePagePlayer(aud);
-            updatePagePlayer(next);
-
-
-            
-            // playingAudio = next;
-            updateAudio(next);
-
-            addSongName($(next).data('name'));
+            prevTrack();
 
         }
         else if ($(e.target).hasClass('player__icon--play') || $(e.target).hasClass('player__icon--pause')){
-            player = $(this);
-            var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            // console.log(aud.src)
-            var pAud = $('*[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
-            // console.log(pAud);
-            
-            let pPath;
-            if (aud.paused) {
-                aud.play();
-                $('.player__icon--pause').css('display','none');
-                $('.player__icon--play').css('display','block');
-                $(this).find('.player__icon--play').css('display','none');
-                $(this).find('.player__icon--pause').css('display','block');
-                // console.log($(pAud).siblings('.player__btn').find('.player__icon--pause'));
-                if (typeof pAud !== "undefined") {
-                    $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
-                    $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
-                }
-            }
-            else {
-                aud.pause();
-                $('.player__icon--pause').css('display','none');
-                $('.player__icon--play').css('display','block');
-                $(this).find('.player__icon--pause').css('display','none');
-                $(this).find('.player__icon--play').css('display','block');
-                // $('.player__playicon').html('▶');
-            }
-            let path = $(this).find('path.player__progressbar')[0];
-            pPath = $(pAud).siblings('.player__btn').find('path.player__progressbar')[0];
-            aud.ontimeupdate = function(){
-                let value = aud.currentTime / aud.duration * 100
-                let length = path.getTotalLength();
-                let to = length *( value / 100);
-                // Trigger Layout in Safari Hack 
-                // https://jakearchibald.com/2013/animated-line-drawing-svg/
-                path.getBoundingClientRect();
-                path.style.strokeDashoffset = Math.max(0, 200-to); 
-                if (typeof pPath !== "undefined") {
-                    pPath.getBoundingClientRect();
-                    pPath.style.strokeDashoffset = Math.max(0, 200-to); 
-                }
-            } 
+            playPauseTrack();
         }
     });
+
+    function nextTrack(){
+        // console.log('next');
+            
+        var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+        var next = $(aud).next()[0];
+        
+        // aud.currentTime = 0;
+        aud.pause();
+        if (typeof next !== "undefined") {
+            next.play();
+            navigator.mediaSession.playbackState = "playing";
+            $('.player--main .player__icon--play').css('display', 'none');
+            $('.player--main .player__icon--pause').css('display', 'block');
+        }
+        else {
+            next = $('#current-playlist').children('audio')[0];
+            navigator.mediaSession.playbackState = "paused";
+            $('.player__icon--pause').css('display', 'none');
+            $('.player__icon--play').css('display', 'block');
+        }
+        
+        $('#current-playlist audio').attr('data-playing','false');
+        $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
+        
+        if (typeof playingAudio !== "undefined") {
+            playingAudio.currentTime = 0;
+            playingAudio.pause();
+        }
+        
+        updatePagePlayer(aud);
+        updatePagePlayer(next);
+
+        // playingAudio = next;
+        updateAudio(next);
+
+        addSongName($(next).data('name'));
+    }
+
+    function prevTrack() {
+                   // console.log('pprev');
+            
+                   var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+                   var next = $(aud).prev()[0];
+                   
+                   aud.pause();
+                   if(typeof next == "undefined"){
+                       next = $('#current-playlist').children('audio')[0];
+                       navigator.mediaSession.playbackState = "paused";
+                       $('.player__icon--pause').css('display', 'none');
+                       $('.player__icon--play').css('display', 'block');
+                   }
+                   else {
+                       next.play();
+                       navigator.mediaSession.playbackState = "playing";
+                       $('.player--main .player__icon--play').css('display', 'none');
+                       $('.player--main .player__icon--pause').css('display', 'block');
+                   }
+                   // console.log(next);
+                   $('#current-playlist audio').attr('data-playing','false');
+                   $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
+                   
+                   
+                   // console.log(aud);
+                   // aud.currentTime = 0;
+                   
+                   // aud.pause();
+                   // next.play();
+                   
+                   if (typeof playingAudio !== "undefined") {
+                       playingAudio.currentTime = 0;
+                       playingAudio.pause();
+                   }
+                   
+                   updatePagePlayer(aud);
+                   updatePagePlayer(next);
+       
+       
+                   
+                   // playingAudio = next;
+                   updateAudio(next);
+       
+                   addSongName($(next).data('name'));
+    }
+
+    function playPauseTrack(){
+        // player = $(this);
+        var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+        // console.log(aud.src)
+        var pAud = $('*[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
+        // console.log(pAud);
+        
+        let pPath;
+        if (aud.paused) {
+            aud.play();
+            navigator.mediaSession.playbackState = "playing";
+            $('.player__icon--pause').css('display','none');
+            $('.player__icon--play').css('display','block');
+            $('.player--main .player__icon--play').css('display','none');
+            $('.player--main .player__icon--pause').css('display','block');
+            // console.log($(pAud).siblings('.player__btn').find('.player__icon--pause'));
+            if (typeof pAud !== "undefined") {
+                $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
+                $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
+            }
+        }
+        else {
+            aud.pause();
+            navigator.mediaSession.playbackState = "paused";
+            $('.player__icon--pause').css('display','none');
+            $('.player__icon--play').css('display','block');
+            // $('.player__playicon').html('▶');
+        }
+        let path = $('.player--main path.player__progressbar')[0];
+        pPath = $(pAud).siblings('.player__btn').find('path.player__progressbar')[0];
+        aud.ontimeupdate = function(){
+            let value = aud.currentTime / aud.duration * 100
+            let length = path.getTotalLength();
+            let to = length *( value / 100);
+            // Trigger Layout in Safari Hack 
+            // https://jakearchibald.com/2013/animated-line-drawing-svg/
+            path.getBoundingClientRect();
+            path.style.strokeDashoffset = Math.max(0, 200-to); 
+            if (typeof pPath !== "undefined") {
+                pPath.getBoundingClientRect();
+                pPath.style.strokeDashoffset = Math.max(0, 200-to); 
+            }
+        } 
+    }
 
     $('.body').on('click', '*[data-local-url] .player', function() {
         player = $(this);
         $('.player--main').addClass('playing');
         var aud = $(this).children('audio')[0];
         
+        nowPlaying.album = $.trim($(this).parents('.article').data('album'));
+
         if (needNewPlaylist == true) {
             var playlist = $('[data-local-url] .player audio');
             playlist = $(playlist).clone();
             
+            nowPlaying.artist = $.trim($('.header__title--main').text());
+
             $('#current-playlist').html('');
             $("#current-playlist").append(playlist);
             needNewPlaylist = false;
@@ -292,11 +334,14 @@ $(function() {
             playingAudio.pause();
         }
         
-        addSongName($(aud).data('name'));
   
         // playingAudio = aud;
         updateAudio(aud);
         
+        addSongName($(aud).data('name'));
+        
+        
+
         let playerpath = $(this).find('path.player__progressbar')[0];
         let mainplayerpath = $('.player--main path.player__progressbar')[0];
         aud.ontimeupdate = function(){
@@ -390,8 +435,35 @@ $(function() {
     });
 
     function addSongName(name){
-        $('.song-title').text(name);
-        defilingText();
+        // console.log($('#album-name').text());
+        // console.log($('.header__title--main').text());
+        if (typeof nowPlaying.cover !== "undefined") {
+            $('.song-title').text(name);
+            defilingText();
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: name,
+                    artist: nowPlaying.artist,
+                    album: nowPlaying.album,
+                    // artwork: $(cover).attr('src'),
+                    artwork: [
+                    { src: '../assets/img/' + nowPlaying.cover +'--128-128.png' , sizes: '128x128', type: 'image/png' },
+                    { src:  '../assets/img/' + nowPlaying.cover +'.jpg', sizes: '512x512', type: 'image/jpg' },
+                    ]
+                });
+            }
+        }
+        else {
+            $('.song-title').text(name);
+            defilingText();
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: name,
+                    artist: nowPlaying.artist,
+                    album: nowPlaying.album,
+                });
+            }
+        }
     }
 
     function defilingText() {
@@ -403,31 +475,20 @@ $(function() {
 
     function updateAudio(aud){
         let next;
+        cover = $(aud).data('pic');
         playingAudio = aud;
+        
+        nowPlaying.title = $(aud).data('name');
+        nowPlaying.cover = $(aud).data('pic');
+
+
         aud.addEventListener('ended',function(){
             //play next song
             // var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            if(typeof aud == "undefined"){
-                aud = $('#current-playlist').children('audio')[0];
-                aud.pause();
-            }
-            else {
-                next = $(aud).next()[0];
-                // aud.currentTime = 0;
-                aud.pause();
-            }
             
             $('.player--main .player__icon--play').css('display', 'none');
             $('.player--main .player__icon--pause').css('display', 'block');
             
-            if(typeof next == "undefined"){
-                next = $('#current-playlist').children('audio')[0];
-                $('.player--main .player__icon--play').css('display', 'block');
-                $('.player--main .player__icon--pause').css('display', 'none');
-            }
-            else {
-                next.play();
-            }
 
             $('#current-playlist audio').attr('data-playing','false');
             $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
@@ -438,10 +499,29 @@ $(function() {
             }
             
     
+            if(typeof aud == "undefined"){
+                aud = $('#current-playlist').children('audio')[0];
+                aud.pause();
+            }
+            else {
+                next = $(aud).next()[0];
+                // aud.currentTime = 0;
+                aud.pause();
+            }
+            
+            if(typeof next == "undefined"){
+                next = $('#current-playlist').children('audio')[0];
+            }
+            else {
+                next.play();
+            }
+    
             updateAudio(next);
             updatePagePlayer(aud);
             updatePagePlayer(next);
-    
+            
+
+
             addSongName($(next).data('name'));
         });
     }
@@ -450,6 +530,9 @@ $(function() {
         var src = $(aud).attr('src');
         var pAud = $('[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
 
+        // if (typoepAud) {
+        // }
+
         mainplayerpath = $('.player--main path.player__progressbar')[0];
 
         $('.player__progressbar').each(function(){
@@ -457,11 +540,14 @@ $(function() {
             this.style.strokeDashoffset = Math.max(0, 200); 
         })
 
-        if (typeof pAud !== "undefined") {
+        if (pAud.length > 0) {
+            nowPlaying.album = $.trim($(pAud).parents('.article').data('album'));
             $('.article .player__icon--play').css('display','block');
             $('.article .player__icon--pause').css('display','none');
-            $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
-            $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
+            if (aud.paused == false) {
+                $(pAud).siblings('.player__btn').find('.player__icon--pause').css('display','block');
+                $(pAud).siblings('.player__btn').find('.player__icon--play').css('display','none');
+            }
             pPath = $(pAud).siblings('.player__btn').find('path.player__progressbar')[0];
 
             aud.ontimeupdate = function(){
