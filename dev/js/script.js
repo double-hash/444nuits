@@ -184,7 +184,7 @@ $(function() {
             playingAudio.pause();
         }
         
-        updatePagePlayer(aud);
+        // updatePagePlayer(aud);
         updatePagePlayer(next);
 
         // playingAudio = next;
@@ -232,7 +232,7 @@ $(function() {
                        playingAudio.pause();
                    }
                    
-                   updatePagePlayer(aud);
+                //    updatePagePlayer(aud);
                    updatePagePlayer(next);
        
        
@@ -251,7 +251,7 @@ $(function() {
         // console.log(pAud);
         
         let pPath;
-        if (aud.paused) {
+        if (aud.paused == true) {
             aud.play();
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.playbackState = "playing";
@@ -494,7 +494,6 @@ $(function() {
     }
 
     function updateAudio(aud){
-        let next;
         cover = $(aud).data('pic');
         playingAudio = aud;
         
@@ -503,46 +502,7 @@ $(function() {
 
 
         aud.addEventListener('ended',function(){
-            //play next song
-            // var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
-            
-            $('.player--main .player__icon--play').css('display', 'none');
-            $('.player--main .player__icon--pause').css('display', 'block');
-            
-
-            $('#current-playlist audio').attr('data-playing','false');
-            $('#current-playlist audio[src="' + $(next).attr('src') + '"]').attr('data-playing','true');
-            
-            if (typeof playingAudio !== "undefined") {
-                playingAudio.currentTime = 0;
-                playingAudio.pause();
-            }
-            
-    
-            if(typeof aud == "undefined"){
-                aud = $('#current-playlist').children('audio')[0];
-                aud.pause();
-            }
-            else {
-                next = $(aud).next()[0];
-                // aud.currentTime = 0;
-                aud.pause();
-            }
-            
-            if(typeof next == "undefined"){
-                next = $('#current-playlist').children('audio')[0];
-            }
-            else {
-                next.play();
-            }
-    
-            updateAudio(next);
-            updatePagePlayer(aud);
-            updatePagePlayer(next);
-            
-
-
-            addSongName($(next).data('name'));
+            nextTrack();
         });
     }
 
