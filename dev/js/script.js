@@ -115,6 +115,8 @@ $(function() {
     let nowPlaying = {
     }
 
+    nowPlaying.album, nowPlaying.cover = "2016-2018"
+    nowPlaying.artist = "Népal"
     
     var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
 
