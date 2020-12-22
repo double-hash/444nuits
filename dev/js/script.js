@@ -114,6 +114,13 @@ $(function() {
     let needNewPlaylist = true;
     let nowPlaying = {
     }
+
+    
+    var aud = $('#current-playlist').children('audio[data-playing="true"]')[0];
+
+    if (typeof aud !== "undefined") {
+        addSongName($(aud).data('name'));
+    }
     
     if ('mediaSession' in navigator) {
       
