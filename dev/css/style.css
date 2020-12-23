@@ -515,10 +515,14 @@ body.loading {
     margin-left:0.5ch;
 }
 
-.article__item *:first-child {
+.article__item >*:first-child {
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 0;
+    white-space: nowrap;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: string;
 }
 
 .article__item h2,
@@ -645,7 +649,7 @@ body.loading {
         padding-left: calc(var(--col-width));
     }
     .main {
-        max-width:500px;
+        max-width: min(100vw, 550px);
         margin: 0 auto;
     }
     .main--alt {
