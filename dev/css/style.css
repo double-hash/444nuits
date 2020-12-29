@@ -143,6 +143,7 @@ p+p {
     overflow: hidden;
     max-height: 100vh;
     background: white;
+    position: -webkit-sticky;
     position:sticky;
     z-index: 50;
     top:0;
@@ -328,7 +329,7 @@ body.loading {
 
 .loader {
     /* margin: 50px 0; */
-    height:calc(100vh - 200px);
+    /* height:calc(100vh - 200px); */
 }
 
 /* -------------- ANIMATION STYLES -----------------*/

@@ -3,9 +3,9 @@ let headerHeight;
 function loadingAnim(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    var headerInnerHeight = $('.header').innerHeight();
+    var headerInnerHeight = $('.header').height();
     headerHeight = $('.header').outerHeight(true);
-    var loaderPadding = headerHeight - headerInnerHeight;
+    var headerMargins = headerHeight - headerInnerHeight;
     // console.log(headerHeight);
     // console.log(headerInnerHeight);
     // console.log(loaderPadding);
@@ -13,10 +13,12 @@ function loadingAnim(){
     $('.header').append('<div class="loading-screen"></div>');
     $('.header').append('<div class="loader"></div>');
     $('.body').addClass('loading');
-    $('.header').css('position', 'fixed');
+    // $('.header').css('position', 'fixed');
+    // $('.header').css('top', 0);
     $('.sous-titre').css('transform', 'skewX(90deg)');
     $('.sous-titre').css('opacity', '0');
-    $('.main').css('margin-top', headerHeight);
+    $('.loader').css('height', window.innerHeight - headerMargins);
+    // $('.main').css('margin-top', headerHeight);
     // $('.body').imagesLoaded( function() {
         gsap.to($('.sous-titre'), {
             duration: 0.6,
@@ -32,20 +34,20 @@ function loadingAnim(){
             ease: 'power2.inOut',
             onComplete: function() {
                 gsap.to($('.header .loader'), {
-                    duration: 0.7,
-                    height: 90,
-                    ease: 'power2.inOut',
+                    duration: 0.8,
+                    height: headerInnerHeight,
+                    ease: 'power1.out',
                     onComplete : function() {
                         $('.body').removeClass('loading');
                         $('.header').css('position', 'sticky');
-                        $('.main').css('margin-top', 0);
+                        // $('.main').css('margin-top', 0);
                     }
                 });
                 gsap.to($('.loading-screen'), {
-                    duration: 1,
-                    delay:0.7,
+                    duration: 1.2,
+                    // delay:0.4,
                     opacity: 0,
-                    ease: 'Power1.in',
+                    ease: 'Power1.out',
                     onComplete : function() {                            
                         $('.loading-screen').css('display', 'none');
                     // $('.loading-screen').css('display', 'none');
