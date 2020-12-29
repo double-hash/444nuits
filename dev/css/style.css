@@ -740,6 +740,8 @@ body.loading {
         max-width: 200px;
         align-self: flex-end;
     }
+
+
     .player--main > .player__btn {
         opacity:0.4;
         transition: opacity 0.5s ease-in-out;
@@ -747,6 +749,12 @@ body.loading {
     .player--main:hover > * {
         opacity:1;
     }
+
+    
+    .loading .player--main > *{
+        opacity:0 !important; 
+    }
+
     .now-playing{
         opacity:0;
         transition: opacity 0.5s ease-in-out;
