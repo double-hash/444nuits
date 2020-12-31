@@ -312,9 +312,6 @@ body.loading {
     opacity:0;
 }
 
-/* .loading .header {
-    margin:0;
-} */
 
 .loading-screen {
     /* pointer-events: none; */
@@ -467,7 +464,7 @@ body.loading {
 
 .article__header img {
     width: calc( (var(--col-width)*3) - (var(--gutter-width) / 2));
-    height: calc( (var(--col-width)*3) - (var(--gutter-width) / 2));
+    /* height: calc( (var(--col-width)*3) - (var(--gutter-width) / 2)); */
     margin-right: var(--gutter-width);
     object-fit: contain;
 }
