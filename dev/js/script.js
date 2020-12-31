@@ -64,20 +64,14 @@ window.dzAsyncInit = function(articles) {
         // appId  : '447762', // test key
         channelUrl : 'http://127.0.0.1:5500/channel.html'
     });
-
-    // articles.forEach(article => {})
-
     
-    var articles = $('.article');
-    // console.log(articles);
+    var articles = $('.article[data-article-url]');
     $.each(articles, function(name, value) {
-        // console.log(value);
         var article = value;
         let id = $(article).data("article-url");
         let rUrl = $(article).data("redirect-url");
         // Get data from /album/**articleID**/tracks
         DZ.api(id, function(response){
-            // console.log(response);
             response.data.forEach(element => {
                 var duration = {
                     minutes : 0,
@@ -93,13 +87,11 @@ window.dzAsyncInit = function(articles) {
                 var player = new Player(element.preview);
                 var domElement = '<li class="article__item"><h2>' + element.title + '</h2><div class="points"></div><p>'+ duration.minutes +':' + duration.seconds +'</p>'+ player.domElement +'<a href="'+rUrl+'" class="item__more" target="_blank"><span class="more--icon">+</span><svg class="player__progress" viewBox="0 0 50 50" data-value="50" xmlns="http://www.w3.org/2000/svg" ><style>.player__progressbar{fill:none;stroke-miterlimit:round;transition:stroke-dashoffset 500ms ease-in-out;stroke-dasharray:200;stroke-dashoffset:200}</style><path class="player__progressbg" d="M2.5,25a22.5,22.5 0 1,0 45,0a22.5,22.5 0 1,0 -45,0" fill="none"/></svg></a></li>'
                 $(article).find('.article__main').append(domElement);
-                // console.log($('.main'))
                 player.init();
                 $(article).find('.player__icon--pause').css('display','none'); 
             });
         });
     });
-    // Get data from /album/120441792/tracks
     
 };                
 
@@ -478,13 +470,12 @@ $(function() {
         } 
     });
 
+    // TODO: pause embedded YT videos when main player playing + viceversa: pause main player when YT video playing
     // $('.body').on('click', '.article__video', function() {
     //     console.log('iframe');
     // });
 
     function addSongName(name){
-        // console.log($('#album-name').text());
-        // console.log($('.header__title--main').text());
         if (typeof nowPlaying.cover !== "undefined") {
             $('.song-title').text(name);
             defilingText();
@@ -493,7 +484,6 @@ $(function() {
                     title: name,
                     artist: nowPlaying.artist,
                     album: nowPlaying.album,
-                    // artwork: $(cover).attr('src'),
                     artwork: [
                     { src: './assets/img/' + nowPlaying.cover +'--128-128.png' , sizes: '128x128', type: 'image/png' },
                     { src:  './assets/img/' + nowPlaying.cover +'.jpg', sizes: '512x512', type: 'image/jpg' },
@@ -537,9 +527,6 @@ $(function() {
     function updatePagePlayer(aud){
         var src = $(aud).attr('src');
         var pAud = $('[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
-
-        // if (typoepAud) {
-        // }
 
         mainplayerpath = $('.player--main path.player__progressbar')[0];
 
@@ -645,18 +632,31 @@ $(function() {
                     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 }
                 $('.player__icon--pause').css('display','none'); 
-                //launching deezer API
-                // TODO : penser aux projets pas présents sur deezer
-                window.dzAsyncInit($('.article'));
-                // console.log($('.article'));
-                // $('.article').forEach(article => {
-                //     window.dzAsyncInit(article);
-                // })
                 initMainPlayer();
             },
             afterEnter(){
                 needNewPlaylist = true;
             }
+        },
+        {
+            namespace: 'deezer-page',
+            beforeEnter(){
+                if (window.pageYOffset > headerPadding){
+                    document.body.scrollTop = headerPadding; // For Safari
+                    document.documentElement.scrollTop = headerPadding; // For Chrome, Firefox, IE and Opera
+                }
+                else {
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                }
+                $('.player__icon--pause').css('display','none'); 
+                //launching deezer API
+                window.dzAsyncInit($('.article'));
+                initMainPlayer();
+            },
+            // afterEnter(){
+            //     needNewPlaylist = true;
+            // }
         }],
         transitions: [{
             name: 'opacity-transition',
