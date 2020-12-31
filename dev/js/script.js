@@ -175,8 +175,10 @@ $(function() {
             if ('mediaSession' in navigator) {
                     navigator.mediaSession.playbackState = "playing";
             }
-            $('.player--main .player__icon--play').css('display', 'none');
-            $('.player--main .player__icon--pause').css('display', 'block');
+            $('.player__icon--pause').css('display','none');
+            $('.player__icon--play').css('display','block');
+            $('.player--main .player__icon--play').css('display','none');
+            $('.player--main .player__icon--pause').css('display','block');
         }
         else {
             next = $('#current-playlist').children('audio')[0];
@@ -216,8 +218,10 @@ $(function() {
                        if ('mediaSession' in navigator) {
                            navigator.mediaSession.playbackState = "paused";
                        }
-                       $('.player__icon--pause').css('display', 'none');
-                       $('.player__icon--play').css('display', 'block');
+                       $('.player__icon--pause').css('display','none');
+                       $('.player__icon--play').css('display','block');
+                       $('.player--main .player__icon--play').css('display','none');
+                       $('.player--main .player__icon--pause').css('display','block');
                    }
                    else {
                        next.play();
@@ -260,6 +264,12 @@ $(function() {
         // console.log(aud.src)
         var pAud = $('*[data-local-url] .player audio[src="' + $(aud).attr('src') + '"]');
         // console.log(pAud);
+        var dAud = $('*[data-article-url] .player.playing audio')[0];
+
+        if (typeof dAud !== 'undefined'){
+            $('.playing').removeClass('playing');
+            dAud.pause();
+        }
         
         let pPath;
         if (aud.paused == true) {
@@ -389,9 +399,12 @@ $(function() {
     });
     
     $('.body').on('click', '*[data-article-url] .player', function() {
+        $('.playing').removeClass('playing');
         player = $(this);
         player.addClass('playing');
         var aud = $(this).children('audio')[0];
+        var playerAud = $('[data-playing="true"]')[0];
+        playerAud.pause();
         // var src = aud.src;
         // aud = $(aud).clone();
         // var name = $(this).siblings('h2')[0];
@@ -464,6 +477,10 @@ $(function() {
             playerpath.style.strokeDashoffset = Math.max(0, 200-to); 
         } 
     });
+
+    // $('.body').on('click', '.article__video', function() {
+    //     console.log('iframe');
+    // });
 
     function addSongName(name){
         // console.log($('#album-name').text());
