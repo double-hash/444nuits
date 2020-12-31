@@ -463,6 +463,9 @@ body.loading {
 }
 
 .article__header img {
+    display:block;
+    height:auto;
+    align-self: flex-start;
     width: calc( (var(--col-width)*3) - (var(--gutter-width) / 2));
     /* height: calc( (var(--col-width)*3) - (var(--gutter-width) / 2)); */
     margin-right: var(--gutter-width);
@@ -674,7 +677,7 @@ body.loading {
     }
     .article__header img {
         width:100%;
-        height:auto;
+        /* height:auto; */
         /* width: calc(100% + (var(--gutter-width)*2));
         margin-right: calc( 0px - var(--gutter-width));
         margin-left: calc( 0px - var(--gutter-width)); */
