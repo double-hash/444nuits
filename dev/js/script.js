@@ -654,9 +654,9 @@ $(function() {
                 window.dzAsyncInit($('.article'));
                 initMainPlayer();
             },
-            // afterEnter(){
-            //     needNewPlaylist = true;
-            // }
+            afterEnter(){
+                needNewPlaylist = true;
+            }
         }],
         transitions: [{
             name: 'opacity-transition',
